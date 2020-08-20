@@ -1,0 +1,86 @@
+.todo {
+    display: flex;
+
+    .todo-categories {
+        // scroll functionality without scrollbar
+        max-height: 100vh;
+        overflow: scroll;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        background-color: #F8F7FC;
+        min-width: 250px;
+        height: 100vh;
+        font-family: 'Roboto',
+        sans-serif;
+
+        .add-todo-button {
+            display: flex;
+            justify-content: flex-end;
+            padding: 20px;
+
+            button {
+                background-color: transparent;
+                color: #F46458;
+                border-radius: 10px;
+                border: 1px solid #F46458;
+                cursor: pointer;
+
+                svg {
+                    font-size: 2rem;
+                }
+            }
+        }
+
+        .category-row {
+            margin-bottom: 50px;
+            margin-left: 40px;
+
+            &:first-child {
+                padding-top: 20px;
+            }
+
+            h3 {
+                color: #56374C;
+                font-size: 2rem;
+                font-weight: bold;
+                padding: 7px 0;
+
+                &::before {
+                    content: '';
+                    display: inline-block;
+                    width: 7px;
+                    height: 7px;
+                    border-radius: 50%;
+                    border: 3px solid #69b6d5;
+                    vertical-align: 5%;
+                    margin-right: 7px;
+                }
+            }
+
+            a {
+                text-decoration: none;
+                font-size: 1.6rem;
+                padding: 7px 0;
+                font-weight: 300;
+                cursor: pointer;
+                display: block;
+                outline: none;
+
+                &:hover {
+                    color: #519BE5;
+                }
+            }
+        }
+    }
+
+    .todo-main {
+        flex-grow: 1;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+}

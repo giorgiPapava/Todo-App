@@ -1,0 +1,35 @@
+.navigation {
+    background-color: #2831A6;
+    width: 100px;
+    height: 100vh;
+
+    nav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        height: 80%;
+    }
+
+
+    .avatar {
+        width: 50px;
+        border-radius: 50%;
+    }
+
+    a {
+        outline: none;
+        color: inherit;
+
+        svg {
+            color: inherit;
+            font-size: 30px;
+            cursor: pointer;
+
+            &:hover {
+                color: #ECC927;
+            }
+        }
+
+    }
+}
