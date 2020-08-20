@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;900&display=swap');
 
 html {
   font-size: 62.5%;
@@ -13,4 +13,4 @@ html {
   }
 }
 
-@import 'components/layout/Navigation', 'components/todo/Todo', 'components/todo/Category';
+@import 'components/layout/Navigation', 'components/todo/Todo', 'components/todo/category/Category', 'components/todo/category/TodoCard', 'components/todo/category/TodoCards', 'components/auth/Sign';

@@ -19,8 +19,8 @@ function Navigation() {
         <NavLink to="/">
           <HomeIcon />
         </NavLink>
-        <NavLink to="todo/fitness">
-          {/* for now it redirects to hard-coded fitness but I want it to redirect to first category*/}
+        <NavLink to="todo">
+          {/* for now it redirects to todo but I want it to redirect to first category*/}
           <TodoIcon />
         </NavLink>
         <NavLink to="starred">

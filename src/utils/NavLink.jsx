@@ -11,7 +11,7 @@ const NavLink = (props) => (
         style: {
           color:
             // at active nested todo
-            isPartiallyCurrent && props.to === 'todo'
+            isPartiallyCurrent && props.to.startsWith('todo')
               ? '#ECC927'
               : // active
               isCurrent
