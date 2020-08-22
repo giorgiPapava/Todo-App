@@ -1,13 +1,41 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Redirect } from '@reach/router';
+import { connect } from 'react-redux';
+import { signOut } from 'store/actions/authActions';
 
-function Home() {
-  // user dashboard not yet implemented so it will always redirect to sign up
-  const [user, setUser] = useState(null);
-  if (!user) {
-    return <Redirect noThrow to="signup" />;
+function Home({ firebase, signOut }) {
+  if (firebase.auth.isLoaded && !firebase.auth.uid) {
+    return <Redirect noThrow to="signin" />;
+  } else if (!firebase.auth.isLoaded) {
+    return (
+      <div class="lds-roller">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    );
   }
-  return <div className="Home">Welcome</div>;
+  return (
+    <div className="Home">
+      <button onClick={signOut}>Log Out</button>
+    </div>
+  );
 }
 
-export default Home;
+const mapStateToProps = (state) => {
+  console.log(state);
+  return { firebase: state.firebase };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signOut: () => dispatch(signOut()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

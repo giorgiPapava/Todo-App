@@ -14,12 +14,13 @@
         background: rgb(31, 17, 88);
         background: linear-gradient(90deg, rgba(31, 17, 88, 1) 28%, rgba(53, 23, 149, 1) 80%);
         width: 85%;
-        height: 80vh;
+        min-height: 80vh;
         border-radius: 10px;
         display: flex;
         align-items: center;
         justify-content: center;
         flex-direction: column;
+        padding: 30px;
 
         .todo-logo {
             width: 80px;
@@ -45,6 +46,13 @@
         form {
             display: flex;
             flex-direction: column;
+
+            .sign-fail {
+                p {
+                    color: red;
+                    margin: 10px;
+                }
+            }
 
             label {
                 color: lightgrey;

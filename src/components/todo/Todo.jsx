@@ -1,13 +1,25 @@
-import React, { useState } from 'react';
+import React from 'react';
 import AddIcon from '@material-ui/icons/Add';
 import CategoryLink from 'utils/CategoryLink';
 import { Redirect } from '@reach/router';
+import { connect } from 'react-redux';
 
-function Todo({ children }) {
-  // user dashboard not yet implemented so it will always redirect to sign up
-  const [user, setUser] = useState({ user: 'giorgi' });
-  if (!user) {
-    return <Redirect noThrow to="/signup" />;
+function Todo({ children, firebase }) {
+  if (firebase.auth.isLoaded && !firebase.auth.uid) {
+    return <Redirect noThrow to="/signin" />;
+  } else if (!firebase.auth.isLoaded) {
+    return (
+      <div className="lds-roller">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    );
   }
   return (
     <div className="todo">
@@ -47,4 +59,8 @@ function Todo({ children }) {
   );
 }
 
-export default Todo;
+const mapStateToProps = (state) => {
+  return { firebase: state.firebase };
+};
+
+export default connect(mapStateToProps)(Todo);
