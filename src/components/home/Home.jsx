@@ -8,7 +8,7 @@ function Home({ firebase, signOut }) {
     return <Redirect noThrow to="signin" />;
   } else if (!firebase.auth.isLoaded) {
     return (
-      <div class="lds-roller">
+      <div className="lds-roller">
         <div></div>
         <div></div>
         <div></div>

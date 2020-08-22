@@ -31,6 +31,8 @@ function SignUp({ firebase, signUp, authError }) {
     signUp({
       email,
       password,
+      firstname,
+      lastname,
     });
   };
 
