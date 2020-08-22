@@ -3,23 +3,13 @@ import AddIcon from '@material-ui/icons/Add';
 import CategoryLink from 'utils/CategoryLink';
 import { Redirect } from '@reach/router';
 import { connect } from 'react-redux';
+import Loading from 'components/layout/Loading';
 
 function Todo({ children, firebase }) {
   if (firebase.auth.isLoaded && !firebase.auth.uid) {
     return <Redirect noThrow to="/signin" />;
   } else if (!firebase.auth.isLoaded) {
-    return (
-      <div className="lds-roller">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-    );
+    return <Loading />;
   }
   return (
     <div className="todo">

@@ -4,6 +4,7 @@ import { TextField, makeStyles, Button } from '@material-ui/core';
 import { Link, Redirect } from '@reach/router';
 import { connect } from 'react-redux';
 import { signUp } from 'store/actions/authActions';
+import Loading from 'components/layout/Loading';
 
 function SignUp({ firebase, signUp, authError }) {
   const classes = useStyles();
@@ -39,18 +40,7 @@ function SignUp({ firebase, signUp, authError }) {
   if (firebase.auth.isLoaded && firebase.auth.uid) {
     return <Redirect noThrow to="/" />;
   } else if (!firebase.auth.isLoaded) {
-    return (
-      <div className="lds-roller">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-    );
+    return <Loading />;
   }
   return (
     <div className="sign">

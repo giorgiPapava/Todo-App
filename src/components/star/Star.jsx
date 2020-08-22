@@ -1,18 +1,8 @@
 import React from 'react';
+import Loading from 'components/layout/Loading';
 
 function Star() {
-  return (
-    <div className="lds-roller">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-  );
+  return <Loading />;
 }
 
 export default Star;
