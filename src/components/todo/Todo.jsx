@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AddIcon from '@material-ui/icons/Add';
 import CategoryLink from 'utils/CategoryLink';
+import { Redirect } from '@reach/router';
 
 function Todo({ children }) {
+  // user dashboard not yet implemented so it will always redirect to sign up
+  const [user, setUser] = useState({ user: 'giorgi' });
+  if (!user) {
+    return <Redirect noThrow to="/signup" />;
+  }
   return (
     <div className="todo">
       <div className="todo-categories">
