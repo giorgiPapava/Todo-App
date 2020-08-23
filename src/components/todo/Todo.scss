@@ -39,7 +39,7 @@
         }
 
         .category-row {
-            margin-bottom: 50px;
+            margin-bottom: 20px;
             margin-left: 40px;
 
             &:first-child {
@@ -62,6 +62,10 @@
                     vertical-align: 5%;
                     margin-right: 7px;
                 }
+            }
+
+            h3~a {
+                margin-left: 20px;
             }
 
             a {

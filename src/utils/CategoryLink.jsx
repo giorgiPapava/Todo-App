@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from '@reach/router';
 
-const NavLink = (props) => (
+const CategoryLink = (props) => (
   <Link
     {...props}
     getProps={({ isCurrent }) => {
@@ -16,4 +16,4 @@ const NavLink = (props) => (
   />
 );
 
-export default NavLink;
+export default CategoryLink;
