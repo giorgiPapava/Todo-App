@@ -19,7 +19,7 @@ function App() {
           <Home path="/" />
           <SignUp path="/signup" />
           <SignIn path="/signin" />
-          <Todo path="/todo/*"></Todo>
+          <Todo path="/todo/*" />
           <Star path="/starred" />
         </Router>
       </main>
