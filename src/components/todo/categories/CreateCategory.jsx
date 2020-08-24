@@ -99,6 +99,7 @@ function CreateCategory({ categories, userID }) {
         .set({
           categoryID: categoryID,
           subCategoryName: subCategory,
+          userID: userID,
         })
         .then(() => {
           handleClose();
@@ -114,6 +115,7 @@ function CreateCategory({ categories, userID }) {
         .add({
           categoryID: category,
           subCategoryName: subCategory,
+          userID: userID,
         })
         .then(function (docRef) {
           console.log('Document written with ID: ', docRef.id);

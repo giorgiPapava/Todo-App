@@ -47,6 +47,26 @@
                 padding-top: 20px;
             }
 
+            .categoryNameWrapper {
+                display: flex;
+                justify-content: space-between;
+                width: 80%;
+                max-width: 250px;
+
+                h3 {
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                }
+
+                svg {
+                    margin-top: 5px;
+                    margin-left: 5px;
+                    color: #2831A6;
+                    font-size: 2rem;
+                }
+            }
+
             h3 {
                 color: #56374C;
                 font-size: 2rem;
@@ -62,6 +82,25 @@
                     border: 3px solid #69b6d5;
                     vertical-align: 5%;
                     margin-right: 7px;
+                }
+            }
+
+            .subcategory-wrapper {
+                display: flex;
+                justify-content: space-between;
+                width: 80%;
+                max-width: 250px;
+
+                a {
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                }
+
+                svg {
+                    margin-top: 5px;
+                    color: red;
+                    font-size: 2rem;
                 }
             }
 
