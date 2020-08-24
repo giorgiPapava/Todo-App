@@ -19,7 +19,6 @@ function Home({ firebase, signOut }) {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return { firebase: state.firebase };
 };
 

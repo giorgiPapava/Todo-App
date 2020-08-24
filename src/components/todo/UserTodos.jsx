@@ -1,17 +1,24 @@
 import React from 'react';
-import TodoHeader from './TodoHeader';
-import Todos from './Todos';
-import CategoryInfo from './CategoryInfo';
+import TodoHeader from './todos/TodoHeader';
+import TodosWrapper from './todos/TodosWrapper';
+import CategoryInfo from './todos/CategoryInfo';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 
-function UserTodos({ todos }) {
+function UserTodos({ todos, subCategoryID }) {
+  if (subCategoryID && todos) {
+    todos = Object.fromEntries(
+      Object.entries(todos).filter(
+        ([key, todo]) => subCategoryID === todo.subCategoryID
+      )
+    );
+  }
   return (
     <div className="user-todos">
       <TodoHeader />
       <CategoryInfo />
-      <Todos todos={todos} />
+      <TodosWrapper todos={todos} />
     </div>
   );
 }

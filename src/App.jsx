@@ -21,6 +21,8 @@ function App() {
           <SignIn path="/signin" />
           <Todo path="/todo/*" />
           <Star path="/starred" />
+          <Star path="/completed" />
+          <Star path="/deleted" />
         </Router>
       </main>
     </div>

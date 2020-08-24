@@ -13,4 +13,4 @@ html {
   }
 }
 
-@import 'components/layout/Navigation', 'components/todo/Todo', 'components/todo/userTodos/UserTodos', 'components/todo/userTodos/TodoCard', 'components/todo/userTodos/Todos', 'components/auth/Sign', 'components/layout/Loading';
+@import 'components/layout/Navigation', 'components/todo/Todo', 'components/todo/UserTodos', 'components/todo/todos/TodoCard', 'components/auth/Sign', 'components/layout/Loading', 'components/todo/categories/CreateCategory';

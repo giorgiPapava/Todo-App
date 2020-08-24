@@ -4,15 +4,18 @@ import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import CategoryLink from 'utils/CategoryLink';
 
-function SubCategories({ subCategories }) {
+function SubCategories({ subCategories, categoryID }) {
   return (
     <>
       {subCategories &&
         Object.entries(subCategories).map(([key, subCategory]) => {
           return (
-            <CategoryLink key={key} to={subCategory.categoryID + '/' + key}>
-              {subCategory.subCategoryName}
-            </CategoryLink>
+            subCategory &&
+            subCategory.categoryID === categoryID && (
+              <CategoryLink key={key} to={subCategory.categoryID + '/' + key}>
+                {subCategory.subCategoryName}
+              </CategoryLink>
+            )
           );
         })}
     </>
@@ -29,7 +32,6 @@ export default compose(
   firestoreConnect((props) => [
     {
       collection: 'subCategories',
-      where: [['categoryID', '==', props.categoryID]],
     },
   ])
 )(SubCategories);

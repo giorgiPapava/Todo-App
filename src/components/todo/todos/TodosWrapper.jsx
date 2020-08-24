@@ -6,7 +6,6 @@ function Todos({ todos }) {
     <div className="todo-cards">
       {todos &&
         Object.entries(todos).map(([key, todo]) => {
-          console.log(todo);
           return (
             <TodoCard
               key={key}

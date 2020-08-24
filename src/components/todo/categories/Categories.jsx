@@ -3,17 +3,22 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import SubCategories from './SubCategories';
+import CreateCategory from './CreateCategory';
 
-function Categories({ categories }) {
+function Categories({ categories, uid }) {
   return (
-    <div>
+    <div className="todo-categories">
+      <CreateCategory categories={categories} userID={uid} />
+
       {categories &&
         Object.entries(categories).map(([key, category]) => {
           return (
-            <div key={key} className="category-row">
-              <h3>{category.categoryName}</h3>
-              <SubCategories categoryID={key} />
-            </div>
+            category && (
+              <div key={key} className="category-row">
+                <h3>{category.categoryName}</h3>
+                <SubCategories categoryID={key} />
+              </div>
+            )
           );
         })}
     </div>
