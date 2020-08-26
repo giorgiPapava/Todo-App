@@ -6,12 +6,10 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 
-function UserTodos({ todos, subCategoryID }) {
-  if (subCategoryID && todos) {
-    todos = Object.fromEntries(
-      Object.entries(todos).filter(
-        ([key, todo]) => subCategoryID === todo.subCategoryID
-      )
+function UserTodos({ todos, subcategoryID }) {
+  if (subcategoryID && todos) {
+    todos = Object.values(todos).filter(
+      (todo) => todo.subcategoryID === subcategoryID
     );
   }
   return (
@@ -24,7 +22,7 @@ function UserTodos({ todos, subCategoryID }) {
 }
 const mapStateToProps = (state) => {
   return {
-    todos: state.firestore.data.todos,
+    todos: state.firestore.ordered.todos,
   };
 };
 export default compose(

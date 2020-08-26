@@ -19,7 +19,7 @@ function Todo({ auth }) {
       <div className="todo-main">
         <Router>
           <UserTodos path="/" uid={auth.uid} />
-          <UserTodos path="/:categoryID/:subCategoryID" uid={auth.uid} />
+          <UserTodos path="/:categoryID/:subcategoryID" uid={auth.uid} />
         </Router>
       </div>
     </div>

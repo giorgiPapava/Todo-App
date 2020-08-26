@@ -6,7 +6,6 @@ import SubCategories from './SubCategories';
 import CreateCategory from './CreateCategory';
 
 function Categories({ categories, uid }) {
-  console.log(categories);
   return (
     <div className="todo-categories">
       <CreateCategory categories={categories} userID={uid} />
@@ -16,11 +15,7 @@ function Categories({ categories, uid }) {
           return (
             category && (
               <div key={key} className="category-row">
-                <SubCategories
-                  uid={uid}
-                  categoryName={category.categoryName}
-                  categoryID={key}
-                />
+                <SubCategories categoryID={key} />
               </div>
             )
           );

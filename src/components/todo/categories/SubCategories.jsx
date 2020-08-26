@@ -7,68 +7,71 @@ import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
 import { db } from 'config/firebaseConfig';
 
-function SubCategories({ subCategories, categoryID, categoryName }) {
-  let categoryIsEmpty = true;
-  subCategories &&
-    Object.entries(subCategories).map(([key, subCategory]) => {
-      if (subCategory?.categoryID === categoryID) categoryIsEmpty = false;
-    });
+function SubCategories({ firestore, category, subcategories, categoryID }) {
+  let isEmpty =
+    firestore.ordered[`${categoryID}-tasks`] && subcategories.length === 0;
 
   const handleSubCategoryDelete = (e) => {
     const subCategoryID =
       e.target.parentNode.dataset.subid ||
       e.target.parentNode.parentNode.dataset.subid;
 
-    subCategoryID && db.collection('subCategories').doc(subCategoryID).delete();
+    subCategoryID &&
+      db
+        .collection('categories')
+        .doc(categoryID)
+        .collection('subcategories')
+        .doc(subCategoryID)
+        .delete();
   };
 
   const handleCategoryDelete = (e) => {
     const categoryID =
       e.target.parentNode.dataset.subid ||
       e.target.parentNode.parentNode.dataset.categoryid;
+
     categoryID && db.collection('categories').doc(categoryID).delete();
   };
   return (
     <>
-      <div className="categoryNameWrapper" data-categoryid={categoryID}>
-        <h3>{categoryName}</h3>
-        {categoryIsEmpty && <RemoveCircleIcon onClick={handleCategoryDelete} />}
+      <div className="categoryName-wrapper" data-categoryid={categoryID}>
+        <h3>{category.categoryName}</h3>
+        {isEmpty && <RemoveCircleIcon onClick={handleCategoryDelete} />}
       </div>
 
-      {subCategories &&
-        Object.entries(subCategories).map(([key, subCategory]) => {
-          return (
-            subCategory &&
-            subCategory.categoryID === categoryID && (
-              <div className="subcategory-wrapper" data-subid={key}>
-                <CategoryLink key={key} to={subCategory.categoryID + '/' + key}>
-                  {subCategory.subCategoryName}{' '}
-                </CategoryLink>
-                <DeleteForeverIcon onClick={handleSubCategoryDelete} />
-              </div>
-            )
-          );
-        })}
+      {subcategories &&
+        Object.values(subcategories).map((subcategory) => (
+          <div
+            className="subcategory-wrapper"
+            key={subcategory.id}
+            data-subid={subcategory.id}
+          >
+            <CategoryLink to={categoryID + '/' + subcategory.id}>
+              {subcategory.subcategoryName}
+            </CategoryLink>
+            <DeleteForeverIcon onClick={handleSubCategoryDelete} />
+          </div>
+        ))}
     </>
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    subCategories: state.firestore.data.subCategories,
-  };
-};
 export default compose(
-  connect(mapStateToProps),
-  firestoreConnect((props) => [
-    {
-      collection: 'subCategories',
-      where: [['userID', '==', props.uid]],
-    },
-    // {
-    //   collection: 'categories',
-    //   doc: props.categoryID,
-    //   subcollections: [{ collection: 'subCategories' }],
-    // },
-  ])
+  firestoreConnect((props) => {
+    return [
+      {
+        collection: 'categories',
+        doc: props.categoryID,
+        subcollections: [{ collection: 'subcategories' }],
+        storeAs: `${props.categoryID}-tasks`,
+      },
+    ];
+  }),
+  connect(({ firestore }, props) => {
+    return {
+      category: firestore.data.categories[props.categoryID],
+      subcategories: firestore.ordered[`${props.categoryID}-tasks`] || [],
+      firestore: firestore,
+    };
+  })
 )(SubCategories);

@@ -92,33 +92,16 @@ function CreateCategory({ categories, userID }) {
       .then((docRef) => createSubCategory(docRef.id));
   };
 
-  const createSubCategory = (categoryID) => {
+  const createSubCategory = (newCategoryID) => {
+    const categoryID = newCategoryID || category;
     if (categoryID) {
-      db.collection('subCategories')
+      db.collection('categories')
         .doc(categoryID)
-        .set({
-          categoryID: categoryID,
-          subCategoryName: subCategory,
-          userID: userID,
+        .collection('subcategories')
+        .add({
+          subcategoryName: subCategory,
         })
         .then(() => {
-          handleClose();
-          setCategory('');
-          setSubCategory('');
-          setNewCategory('');
-        })
-        .catch(function (error) {
-          console.error('Error adding document: ', error);
-        });
-    } else {
-      db.collection('subCategories')
-        .add({
-          categoryID: category,
-          subCategoryName: subCategory,
-          userID: userID,
-        })
-        .then(function (docRef) {
-          console.log('Document written with ID: ', docRef.id);
           handleClose();
           setCategory('');
           setSubCategory('');
