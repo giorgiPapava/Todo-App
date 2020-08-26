@@ -22,6 +22,8 @@ import {
 } from '@material-ui/core';
 import { db } from 'config/firebaseConfig';
 import SubcategoriesSelect from './SubcategoriesSelect';
+import swallFailure from 'utils/swalFailure';
+import swallSuccess from 'utils/swalSuccess';
 
 function CreateTodo({ uid, categories }) {
   const classes = useStyles();
@@ -40,9 +42,9 @@ function CreateTodo({ uid, categories }) {
     setOpen(false);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    db.collection('todos')
+  const todoCreateFunction = () => {
+    return db
+      .collection('todos')
       .add({
         date: selectedDate,
         description: todoName,
@@ -61,6 +63,13 @@ function CreateTodo({ uid, categories }) {
       .catch(function (error) {
         console.error('Error adding document: ', error);
       });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    todoCreateFunction()
+      .then(() => swallSuccess('todo'))
+      .catch((error) => swallFailure(error));
   };
 
   return (

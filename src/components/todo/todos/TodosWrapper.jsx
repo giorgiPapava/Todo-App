@@ -8,6 +8,7 @@ function Todos({ todos }) {
         Object.values(todos).map((todo) => {
           return (
             <TodoCard
+              todoID={todo.id}
               key={todo.id}
               status={todo.status}
               description={todo.description}

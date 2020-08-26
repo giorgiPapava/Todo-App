@@ -11,6 +11,59 @@ html {
   main {
     flex: 1;
   }
+
+  svg {
+    cursor: pointer;
+  }
+}
+
+.swal2-container {
+  #swal2-title {
+    font-size: 3rem;
+    font-weight: 400;
+  }
+
+  .swal2-icon {
+    font-size: 1.5rem;
+  }
+
+  .swal2-content {
+    font-size: 1.4rem;
+    font-weight: 300;
+  }
+
+  .swal2-actions {
+    button {
+      padding: 10px 20px;
+      font-family: Roboto;
+      font-size: 1.4rem;
+    }
+
+    button.swal2-confirm {
+      background-color: #218838;
+      border-color: #1e7e34;
+
+      &:hover {
+        background-color: #218838;
+      }
+    }
+
+    button.swal2-cancel {
+      background-color: #c82333;
+      border-color: #bd2130;
+
+
+      &:hover {
+        background-color: #C82333;
+      }
+    }
+  }
+
+  .swal2-footer {
+    font-size: 1.2rem;
+    font-weight: 100;
+  }
+
 }
 
 @import 'components/layout/Navigation', 'components/todo/Todo', 'components/todo/UserTodos', 'components/todo/todos/TodoCard', 'components/auth/Sign', 'components/layout/Loading', 'components/todo/categories/CreateCategory', 'components/todo/todos/createTodo/CreateTodo';

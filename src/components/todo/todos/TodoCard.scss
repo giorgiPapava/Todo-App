@@ -8,6 +8,20 @@
     flex-direction: column;
     position: relative;
 
+    .actions {
+        align-self: flex-end;
+        position: absolute;
+
+        svg {
+            font-size: 2rem;
+            color: #483946;
+        }
+
+        svg.remove {
+            color: red
+        }
+    }
+
     .todo-status {
         text-transform: uppercase;
         color: #56CA6C;
@@ -40,5 +54,6 @@
         font-family: Roboto;
         font-weight: 500;
         padding: 5px 10px;
+        cursor: pointer;
     }
 }

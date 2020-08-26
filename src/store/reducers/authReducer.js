@@ -1,3 +1,6 @@
+import swallSuccess from 'utils/swalSuccess';
+import swallFailure from 'utils/swalFailure';
+
 const initState = {
   authError: null,
 };
@@ -5,28 +8,30 @@ const initState = {
 const authReducer = (state = initState, action) => {
   switch (action.type) {
     case 'LOGIN_ERROR':
-      console.log('login error');
+      swallFailure(action.error.message);
       return {
         ...state,
         authError: 'Login failed',
       };
     case 'LOGIN_SUCCESS':
-      console.log('login success');
+      swallSuccess('Welcome Back!');
+
       return {
         ...state,
         authError: null,
       };
     case 'SIGN_OUT_SUCCESS':
-      console.log('signed out');
+      swallSuccess('Bye bye :)');
       return state;
     case 'SIGNUP_SUCCESS':
-      console.log('signed up');
+      swallSuccess('Welcome!');
+
       return {
         ...state,
         authError: null,
       };
     case 'SIGNUP_ERROR':
-      console.log("couldn't sign up");
+      swallFailure(action.error.message);
       return {
         ...state,
         authError: action.error.message,

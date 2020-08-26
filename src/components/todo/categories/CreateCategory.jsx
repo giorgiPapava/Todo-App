@@ -15,6 +15,8 @@ import {
   Button,
 } from '@material-ui/core';
 import { db } from 'config/firebaseConfig';
+import swallSuccess from 'utils/swalSuccess';
+import swallFailure from 'utils/swalFailure';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -103,13 +105,14 @@ function CreateCategory({ categories, userID }) {
           subcategoryName: subCategory,
         })
         .then(() => {
+          swallSuccess('category');
           handleClose();
           setCategory('');
           setSubCategory('');
           setNewCategory('');
         })
         .catch(function (error) {
-          console.error('Error adding document: ', error);
+          swallFailure(error);
         });
     }
   };
@@ -152,14 +155,6 @@ function CreateCategory({ categories, userID }) {
           <div className={classes.paper}>
             <h3>Create Category</h3>
             <form onSubmit={handleSubmit}>
-              <TextField
-                required
-                id="subcategory"
-                label="Subcategory Name"
-                value={subCategory}
-                onChange={(event) => setSubCategory(event.target.value)}
-              />
-
               <FormControl
                 required
                 variant="outlined"
@@ -183,17 +178,25 @@ function CreateCategory({ categories, userID }) {
                       </MenuItem>
                     ))}
                 </Select>
-              </FormControl>
 
-              {category === 'create' && (
+                {category === 'create' && (
+                  <TextField
+                    required
+                    id="create-category"
+                    label="Category Name"
+                    value={newCategory}
+                    onChange={(event) => setNewCategory(event.target.value)}
+                  />
+                )}
+
                 <TextField
                   required
-                  id="create-category"
-                  label="Category Name"
-                  value={newCategory}
-                  onChange={(event) => setNewCategory(event.target.value)}
+                  id="subcategory"
+                  label="Subcategory Name"
+                  value={subCategory}
+                  onChange={(event) => setSubCategory(event.target.value)}
                 />
-              )}
+              </FormControl>
 
               <Button
                 type="submit"

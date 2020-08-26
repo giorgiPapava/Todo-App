@@ -6,10 +6,24 @@ import CategoryLink from 'utils/CategoryLink';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
 import { db } from 'config/firebaseConfig';
+import swalConfirm from 'utils/swalConfirm';
 
 function SubCategories({ firestore, category, subcategories, categoryID }) {
   let isEmpty =
     firestore.ordered[`${categoryID}-tasks`] && subcategories.length === 0;
+
+  const subcategoryDeleteFunction = (subCategoryID) => {
+    return db
+      .collection('categories')
+      .doc(categoryID)
+      .collection('subcategories')
+      .doc(subCategoryID)
+      .delete();
+  };
+
+  const categoryDeleteFunction = (categoryID) => {
+    return db.collection('categories').doc(categoryID).delete();
+  };
 
   const handleSubCategoryDelete = (e) => {
     const subCategoryID =
@@ -17,12 +31,7 @@ function SubCategories({ firestore, category, subcategories, categoryID }) {
       e.target.parentNode.parentNode.dataset.subid;
 
     subCategoryID &&
-      db
-        .collection('categories')
-        .doc(categoryID)
-        .collection('subcategories')
-        .doc(subCategoryID)
-        .delete();
+      swalConfirm('subcategory', subcategoryDeleteFunction, subCategoryID);
   };
 
   const handleCategoryDelete = (e) => {
@@ -30,7 +39,7 @@ function SubCategories({ firestore, category, subcategories, categoryID }) {
       e.target.parentNode.dataset.subid ||
       e.target.parentNode.parentNode.dataset.categoryid;
 
-    categoryID && db.collection('categories').doc(categoryID).delete();
+    categoryID && swalConfirm('category', categoryDeleteFunction, categoryID);
   };
   return (
     <>

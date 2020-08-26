@@ -9,14 +9,9 @@
         display: flex;
         flex-direction: column;
 
-        div.MuiFormControl-root:nth-child(2) {
-            margin: 0;
-            margin-top: 25px;
-            margin-bottom: 5px;
+        div.MuiFormControl-root {
+            margin: 10px 0;
         }
 
-        button {
-            margin-top: 20px;
-        }
     }
 }
