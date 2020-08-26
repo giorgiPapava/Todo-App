@@ -31,7 +31,8 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
+    border: '2px solid #2831A6',
+    borderRadius: '20px',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
@@ -138,7 +139,7 @@ function CreateCategory({ categories, userID }) {
       <Modal
         aria-labelledby="create-category"
         aria-describedby="create category form"
-        className={classes.modal + ' create-caregory'}
+        className={classes.modal + ' create-category'}
         open={open}
         onClose={handleClose}
         closeAfterTransition
@@ -164,12 +165,10 @@ function CreateCategory({ categories, userID }) {
                 variant="outlined"
                 className={classes.formControl}
               >
-                <InputLabel id="demo-simple-select-outlined-label">
-                  Category
-                </InputLabel>
+                <InputLabel id="category-name-label">Category</InputLabel>
                 <Select
-                  labelId="demo-simple-select-outlined-label"
-                  id="demo-simple-select-outlined"
+                  labelId="category-name-label"
+                  id="category-name"
                   value={category}
                   onChange={(event) => setCategory(event.target.value)}
                   label="Category"
@@ -183,9 +182,6 @@ function CreateCategory({ categories, userID }) {
                         {userCategory.categoryName}
                       </MenuItem>
                     ))}
-                  {/* <MenuItem value={10}>Ten</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem> */}
                 </Select>
               </FormControl>
 

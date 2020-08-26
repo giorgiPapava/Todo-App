@@ -1,8 +1,9 @@
-.create-category {
+.create-todo {
+
     h3 {
         font-size: 2.5rem;
         color: #141852;
-        margin-bottom: 10px;
+        margin-bottom: 20px;
     }
 
     form {
@@ -15,8 +16,20 @@
             margin-bottom: 5px;
         }
 
-        button {
+        &>button {
             margin-top: 20px;
+
+        }
+
+        .MuiButtonBase-root {
+            margin: 0;
+        }
+
+        .date-picker {
+            div:first-child {
+                margin-top: 24.7px;
+                margin-right: 10px;
+            }
         }
     }
 }

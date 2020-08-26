@@ -6,7 +6,8 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 
-function UserTodos({ todos, subcategoryID }) {
+function UserTodos({ uid, todos, subcategoryID }) {
+  console.log(todos);
   if (subcategoryID && todos) {
     todos = Object.values(todos).filter(
       (todo) => todo.subcategoryID === subcategoryID
@@ -14,9 +15,13 @@ function UserTodos({ todos, subcategoryID }) {
   }
   return (
     <div className="user-todos">
-      <TodoHeader />
-      <CategoryInfo />
-      <TodosWrapper todos={todos} />
+      <TodoHeader todos={todos?.length > 0} uid={uid} />
+      {todos?.length > 0 && (
+        <>
+          <CategoryInfo />
+          <TodosWrapper todos={todos} />
+        </>
+      )}
     </div>
   );
 }
