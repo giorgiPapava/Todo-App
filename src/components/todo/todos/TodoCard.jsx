@@ -2,11 +2,14 @@ import React from 'react';
 import moment from 'moment';
 import EditIcon from '@material-ui/icons/Edit';
 import ClearIcon from '@material-ui/icons/Clear';
-import Swal from 'sweetalert2';
 import { db } from 'config/firebaseConfig';
 import swalConfirm from 'utils/swalConfirm';
 
 function TodoCard({ status, description, date, todoID }) {
+  const todoDate = new Date(date.seconds * 1000);
+  const hours = todoDate.getHours();
+  const minutes = todoDate.getMinutes();
+
   const succesFunction = () => {
     return db.collection('todos').doc(todoID).delete();
   };
@@ -23,7 +26,9 @@ function TodoCard({ status, description, date, todoID }) {
       <p className="todo-status">{status}</p>
       <h4 className="todo-desc">{description}</h4>
       <span>
-        {moment(date.seconds * 1000 + date.nanoseconds).format('lll')}
+        {hours > 0 || minutes > 0
+          ? moment(todoDate).format('lll')
+          : moment(todoDate).format('ll')}
       </span>
       <button className="todo-done-button">Mark as done</button>
     </div>

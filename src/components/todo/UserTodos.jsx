@@ -6,8 +6,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 
-function UserTodos({ uid, todos, subcategoryID }) {
-  console.log(todos);
+function UserTodos({ uid, todos, subcategoryID, categories }) {
   if (subcategoryID && todos) {
     todos = Object.values(todos).filter(
       (todo) => todo.subcategoryID === subcategoryID
@@ -28,6 +27,7 @@ function UserTodos({ uid, todos, subcategoryID }) {
 const mapStateToProps = (state) => {
   return {
     todos: state.firestore.ordered.todos,
+    categories: state.firestore.ordered.categories,
   };
 };
 export default compose(

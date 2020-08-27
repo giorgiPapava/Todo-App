@@ -105,7 +105,7 @@ function CreateCategory({ categories, userID }) {
           subcategoryName: subCategory,
         })
         .then(() => {
-          swallSuccess('category');
+          swallSuccess('Yor category is created!');
           handleClose();
           setCategory('');
           setSubCategory('');

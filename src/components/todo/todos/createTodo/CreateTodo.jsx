@@ -13,13 +13,7 @@ import {
   KeyboardTimePicker,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
-import {
-  FormControl,
-  MenuItem,
-  TextField,
-  Grid,
-  Button,
-} from '@material-ui/core';
+import { FormControl, MenuItem, TextField, Button } from '@material-ui/core';
 import { db } from 'config/firebaseConfig';
 import SubcategoriesSelect from './SubcategoriesSelect';
 import swallFailure from 'utils/swalFailure';
@@ -31,10 +25,17 @@ function CreateTodo({ uid, categories }) {
   const [todoName, setTodoName] = useState('');
   const [categoryID, setCategoryID] = useState('');
   const [subcategoryID, setSubcategoryID] = useState('');
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedTime, setSelectedTime] = useState(null);
 
   const handleOpen = () => {
-    setSelectedDate(new Date());
+    setSelectedDate(
+      new Date(
+        new Date().getFullYear(),
+        new Date().getMonth(),
+        new Date().getDate()
+      )
+    );
     setOpen(true);
   };
 
@@ -150,8 +151,18 @@ function CreateTodo({ uid, categories }) {
                       margin="normal"
                       id="time-picker"
                       label="Time picker"
-                      value={selectedDate}
-                      onChange={(date) => setSelectedDate(date)}
+                      value={selectedTime}
+                      onChange={(date) => {
+                        setSelectedDate(
+                          new Date(
+                            selectedDate.setHours(
+                              date.getHours(),
+                              date.getMinutes()
+                            )
+                          )
+                        );
+                        setSelectedTime(date);
+                      }}
                       KeyboardButtonProps={{
                         'aria-label': 'change time',
                       }}

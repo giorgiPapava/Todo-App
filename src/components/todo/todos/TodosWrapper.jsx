@@ -1,7 +1,7 @@
 import React from 'react';
 import TodoCard from './TodoCard';
 
-function Todos({ todos }) {
+function Todos({ todos, categories }) {
   return (
     <div className="todo-cards">
       {todos &&
