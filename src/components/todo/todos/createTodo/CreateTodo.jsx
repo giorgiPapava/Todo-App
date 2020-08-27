@@ -13,7 +13,14 @@ import {
   KeyboardTimePicker,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
-import { FormControl, MenuItem, TextField, Button } from '@material-ui/core';
+import {
+  FormControl,
+  MenuItem,
+  TextField,
+  Button,
+  Checkbox,
+  FormControlLabel,
+} from '@material-ui/core';
 import { db } from 'config/firebaseConfig';
 import SubcategoriesSelect from './SubcategoriesSelect';
 import swallFailure from 'utils/swalFailure';
@@ -27,8 +34,10 @@ function CreateTodo({ uid, categories }) {
   const [subcategoryID, setSubcategoryID] = useState('');
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
+  const [showDate, setShowDate] = useState(false);
 
   const handleOpen = () => {
+    setOpen(true);
     setSelectedDate(
       new Date(
         new Date().getFullYear(),
@@ -36,7 +45,6 @@ function CreateTodo({ uid, categories }) {
         new Date().getDate()
       )
     );
-    setOpen(true);
   };
 
   const handleClose = () => {
@@ -47,7 +55,7 @@ function CreateTodo({ uid, categories }) {
     return db
       .collection('todos')
       .add({
-        date: selectedDate,
+        date: showDate && selectedDate,
         description: todoName,
         status: 'todo',
         subcategoryID: subcategoryID,
@@ -60,6 +68,7 @@ function CreateTodo({ uid, categories }) {
         setCategoryID('');
         setSubcategoryID('');
         setSelectedDate(new Date());
+        setShowDate(false);
       })
       .catch(function (error) {
         console.error('Error adding document: ', error);
@@ -69,7 +78,7 @@ function CreateTodo({ uid, categories }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     todoCreateFunction()
-      .then(() => swallSuccess('todo'))
+      .then(() => swallSuccess('Your todo is created :)'))
       .catch((error) => swallFailure(error));
   };
 
@@ -134,41 +143,55 @@ function CreateTodo({ uid, categories }) {
                     setSubID={setSubcategoryID}
                   />
                 )}
-                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                  <div className="date-picker">
-                    <KeyboardDatePicker
-                      margin="normal"
-                      id="date-picker-dialog"
-                      label="Date picker dialog"
-                      format="MM/dd/yyyy"
-                      value={selectedDate}
-                      onChange={(date) => setSelectedDate(date)}
-                      KeyboardButtonProps={{
-                        'aria-label': 'change date',
-                      }}
+
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={showDate}
+                      onChange={() => setShowDate(!showDate)}
+                      name="showDate"
                     />
-                    <KeyboardTimePicker
-                      margin="normal"
-                      id="time-picker"
-                      label="Time picker"
-                      value={selectedTime}
-                      onChange={(date) => {
-                        setSelectedDate(
-                          new Date(
-                            selectedDate.setHours(
-                              date.getHours(),
-                              date.getMinutes()
+                  }
+                  label="Add Dates"
+                />
+
+                {showDate && (
+                  <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <div className="date-picker">
+                      <KeyboardDatePicker
+                        margin="normal"
+                        id="date-picker-dialog"
+                        label="Date picker dialog"
+                        format="MM/dd/yyyy"
+                        value={selectedDate}
+                        onChange={(date) => setSelectedDate(date)}
+                        KeyboardButtonProps={{
+                          'aria-label': 'change date',
+                        }}
+                      />
+                      <KeyboardTimePicker
+                        margin="normal"
+                        id="time-picker"
+                        label="Time picker (optional)"
+                        value={selectedTime}
+                        onChange={(date) => {
+                          setSelectedDate(
+                            new Date(
+                              selectedDate.setHours(
+                                date.getHours(),
+                                date.getMinutes()
+                              )
                             )
-                          )
-                        );
-                        setSelectedTime(date);
-                      }}
-                      KeyboardButtonProps={{
-                        'aria-label': 'change time',
-                      }}
-                    />
-                  </div>
-                </MuiPickersUtilsProvider>
+                          );
+                          setSelectedTime(date);
+                        }}
+                        KeyboardButtonProps={{
+                          'aria-label': 'change time',
+                        }}
+                      />
+                    </div>
+                  </MuiPickersUtilsProvider>
+                )}
               </FormControl>
 
               <Button

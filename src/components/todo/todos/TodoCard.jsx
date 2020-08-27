@@ -6,7 +6,7 @@ import { db } from 'config/firebaseConfig';
 import swalConfirm from 'utils/swalConfirm';
 
 function TodoCard({ status, description, date, todoID }) {
-  const todoDate = new Date(date.seconds * 1000);
+  const todoDate = new Date(date?.seconds * 1000);
   const hours = todoDate.getHours();
   const minutes = todoDate.getMinutes();
 
@@ -20,16 +20,18 @@ function TodoCard({ status, description, date, todoID }) {
   return (
     <div className="todo-card">
       <div className="actions">
-        <EditIcon />
+        {/* <EditIcon /> */}
         <ClearIcon onClick={handleDelete} className="remove" />
       </div>
       <p className="todo-status">{status}</p>
       <h4 className="todo-desc">{description}</h4>
-      <span>
-        {hours > 0 || minutes > 0
-          ? moment(todoDate).format('lll')
-          : moment(todoDate).format('ll')}
-      </span>
+      {date && (
+        <span>
+          {(todoDate && hours > 0) || minutes > 0
+            ? moment(todoDate).format('lll')
+            : moment(todoDate).format('ll')}
+        </span>
+      )}
       <button className="todo-done-button">Mark as done</button>
     </div>
   );
