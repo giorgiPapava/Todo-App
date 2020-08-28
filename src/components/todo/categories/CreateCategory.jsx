@@ -17,6 +17,7 @@ import {
 import { db } from 'config/firebaseConfig';
 import swallSuccess from 'utils/swalSuccess';
 import swallFailure from 'utils/swalFailure';
+import firebase from 'config/firebaseConfig';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -87,22 +88,28 @@ function CreateCategory({ categories, userID }) {
   };
 
   const createCategory = () => {
-    db.collection('categories')
+    db.collection('users')
+      .doc(userID)
+      .collection('categories')
       .add({
         categoryName: newCategory,
-        userID: userID,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
       })
       .then((docRef) => createSubCategory(docRef.id));
   };
 
   const createSubCategory = (newCategoryID) => {
+    console.log(category);
     const categoryID = newCategoryID || category;
     if (categoryID) {
-      db.collection('categories')
+      db.collection('users')
+        .doc(userID)
+        .collection('categories')
         .doc(categoryID)
         .collection('subcategories')
         .add({
           subcategoryName: subCategory,
+          timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         })
         .then(() => {
           swallSuccess('Yor category is created!');
@@ -127,8 +134,8 @@ function CreateCategory({ categories, userID }) {
   };
 
   if (categories) {
-    var userCategories = Object.entries(categories).map(([key, category]) => {
-      return { categoryName: category.categoryName, key: key };
+    var userCategories = Object.values(categories).map((category) => {
+      return { categoryName: category.categoryName, key: category.id };
     });
   }
 

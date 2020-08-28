@@ -1,7 +1,7 @@
 import React from 'react';
 import TodoCard from './TodoCard';
 
-function Todos({ todos, categories }) {
+function Todos({ todos, uid }) {
   return (
     <div className="todo-cards">
       {todos &&
@@ -13,6 +13,7 @@ function Todos({ todos, categories }) {
               status={todo.status}
               description={todo.description}
               date={todo.date}
+              uid={uid}
             />
           );
         })}

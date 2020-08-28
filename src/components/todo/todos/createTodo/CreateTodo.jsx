@@ -7,6 +7,7 @@ import { useSpring, animated } from 'react-spring/web.cjs'; // web.cjs is requir
 import AddIcon from '@material-ui/icons/Add';
 import DateFnsUtils from '@date-io/date-fns';
 import PostAddIcon from '@material-ui/icons/PostAdd';
+import firebase from 'config/firebaseConfig';
 
 import {
   MuiPickersUtilsProvider,
@@ -53,13 +54,15 @@ function CreateTodo({ uid, categories }) {
 
   const todoCreateFunction = () => {
     return db
+      .collection('users')
+      .doc(uid)
       .collection('todos')
       .add({
         date: showDate && selectedDate,
         description: todoName,
         status: 'todo',
         subcategoryID: subcategoryID,
-        userID: uid,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
       })
       .then(() => {
         console.log('new todo created');
@@ -68,6 +71,7 @@ function CreateTodo({ uid, categories }) {
         setCategoryID('');
         setSubcategoryID('');
         setSelectedDate(new Date());
+        setSelectedTime(null);
         setShowDate(false);
       })
       .catch(function (error) {
@@ -139,6 +143,7 @@ function CreateTodo({ uid, categories }) {
                 {categoryID && (
                   <SubcategoriesSelect
                     categoryID={categoryID}
+                    uid={uid}
                     subID={subcategoryID}
                     setSubID={setSubcategoryID}
                   />

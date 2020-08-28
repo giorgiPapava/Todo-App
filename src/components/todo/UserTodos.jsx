@@ -5,8 +5,10 @@ import CategoryInfo from './todos/CategoryInfo';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
+import sortTodos from 'utils/sortTodos';
 
 function UserTodos({ uid, todos, subcategoryID, categories }) {
+  todos = todos && sortTodos(todos);
   if (subcategoryID && todos) {
     todos = Object.values(todos).filter(
       (todo) => todo.subcategoryID === subcategoryID
@@ -14,28 +16,30 @@ function UserTodos({ uid, todos, subcategoryID, categories }) {
   }
   return (
     <div className="user-todos">
-      <TodoHeader todos={todos?.length > 0} uid={uid} />
+      <TodoHeader todos={todos?.length > 0} uid={uid} categories={categories} />
       {todos?.length > 0 && (
         <>
           <CategoryInfo />
-          <TodosWrapper todos={todos} />
+          <TodosWrapper todos={todos} uid={uid} />
         </>
       )}
     </div>
   );
 }
-const mapStateToProps = (state) => {
-  return {
-    todos: state.firestore.ordered.todos,
-    categories: state.firestore.ordered.categories,
-  };
-};
+
 export default compose(
-  connect(mapStateToProps),
   firestoreConnect((props) => [
     {
-      collection: 'todos',
-      where: [['userID', '==', props.uid]],
+      collection: 'users',
+      doc: props.uid,
+      subcollections: [{ collection: 'todos' }],
+      storeAs: `${props.uid}-todos`,
     },
-  ])
+  ]),
+  connect(({ firestore }, props) => {
+    return {
+      todos: firestore.ordered[`${props.uid}-todos`] || [],
+      categories: firestore.ordered[`${props.uid}-categories`] || [],
+    };
+  })
 )(UserTodos);

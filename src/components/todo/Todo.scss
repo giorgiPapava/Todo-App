@@ -3,7 +3,7 @@
 
     .todo-categories {
         // scroll functionality without scrollbar
-        max-height: 100vh;
+        min-height: 100vh;
         overflow: scroll;
         -ms-overflow-style: none;
         scrollbar-width: none;
@@ -16,7 +16,7 @@
 
         background-color: #F8F7FC;
         min-width: 250px;
-        height: 100vh;
+
         font-family: 'Roboto',
         sans-serif;
 

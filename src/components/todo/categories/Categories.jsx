@@ -6,16 +6,20 @@ import SubCategories from './SubCategories';
 import CreateCategory from './CreateCategory';
 
 function Categories({ categories, uid }) {
+  // sort categories
+  categories =
+    categories && categories.slice().sort((a, b) => a.timestamp - b.timestamp);
+
   return (
     <div className="todo-categories">
       <CreateCategory categories={categories} userID={uid} />
 
       {categories &&
-        Object.entries(categories).map(([key, category]) => {
+        Object.values(categories).map((category) => {
           return (
             category && (
-              <div key={key} className="category-row">
-                <SubCategories categoryID={key} />
+              <div key={category.id} className="category-row">
+                <SubCategories categoryID={category.id} uid={uid} />
               </div>
             )
           );
@@ -24,17 +28,18 @@ function Categories({ categories, uid }) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    categories: state.firestore.data.categories,
-  };
-};
 export default compose(
-  connect(mapStateToProps),
   firestoreConnect((props) => [
     {
-      collection: 'categories',
-      where: [['userID', '==', props.uid]],
+      collection: 'users',
+      doc: props.uid,
+      subcollections: [{ collection: 'categories' }],
+      storeAs: `${props.uid}-categories`,
     },
-  ])
+  ]),
+  connect(({ firestore }, props) => {
+    return {
+      categories: firestore.ordered[`${props.uid}-categories`] || [],
+    };
+  })
 )(Categories);

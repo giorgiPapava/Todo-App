@@ -2,11 +2,8 @@ import React from 'react';
 import SearchIcon from '@material-ui/icons/Search';
 import { InputBase } from '@material-ui/core';
 import CreateTodo from './createTodo/CreateTodo';
-import { compose } from 'recompose';
-import { connect } from 'react-redux';
-import { firestoreConnect } from 'react-redux-firebase';
 
-function UserTodoHeader({ uid, categories, todos }) {
+function TodoHeader({ uid, categories, todos }) {
   return (
     <div className="userTodo-header">
       {todos && (
@@ -29,18 +26,4 @@ function UserTodoHeader({ uid, categories, todos }) {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    categories: state.firestore.ordered.categories,
-  };
-};
-
-export default compose(
-  connect(mapStateToProps),
-  firestoreConnect((props) => [
-    {
-      collection: 'categories',
-      where: [['userID', '==', props.uid]],
-    },
-  ])
-)(UserTodoHeader);
+export default TodoHeader;

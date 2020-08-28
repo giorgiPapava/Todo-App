@@ -5,13 +5,18 @@ import ClearIcon from '@material-ui/icons/Clear';
 import { db } from 'config/firebaseConfig';
 import swalConfirm from 'utils/swalConfirm';
 
-function TodoCard({ status, description, date, todoID }) {
+function TodoCard({ status, description, date, todoID, uid }) {
   const todoDate = new Date(date?.seconds * 1000);
   const hours = todoDate.getHours();
   const minutes = todoDate.getMinutes();
 
   const succesFunction = () => {
-    return db.collection('todos').doc(todoID).delete();
+    return db
+      .collection('users')
+      .doc(uid)
+      .collection('todos')
+      .doc(todoID)
+      .delete();
   };
 
   const handleDelete = () => {

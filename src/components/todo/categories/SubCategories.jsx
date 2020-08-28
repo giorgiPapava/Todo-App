@@ -8,12 +8,26 @@ import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
 import { db } from 'config/firebaseConfig';
 import swalConfirm from 'utils/swalConfirm';
 
-function SubCategories({ firestore, category, subcategories, categoryID }) {
+function SubCategories({
+  firestore,
+  category,
+  subcategories,
+  categoryID,
+  uid,
+}) {
+  // sort subcategories
+  subcategories =
+    subcategories &&
+    subcategories.slice().sort((a, b) => a.timestamp - b.timestamp);
+
   let isEmpty =
-    firestore.ordered[`${categoryID}-tasks`] && subcategories.length === 0;
+    firestore.ordered[`${categoryID}-subcategories`] &&
+    subcategories.length === 0;
 
   const subcategoryDeleteFunction = (subCategoryID) => {
     return db
+      .collection('users')
+      .doc(uid)
       .collection('categories')
       .doc(categoryID)
       .collection('subcategories')
@@ -22,7 +36,12 @@ function SubCategories({ firestore, category, subcategories, categoryID }) {
   };
 
   const categoryDeleteFunction = (categoryID) => {
-    return db.collection('categories').doc(categoryID).delete();
+    return db
+      .collection('users')
+      .doc(uid)
+      .collection('categories')
+      .doc(categoryID)
+      .delete();
   };
 
   const handleSubCategoryDelete = (e) => {
@@ -69,17 +88,21 @@ export default compose(
   firestoreConnect((props) => {
     return [
       {
-        collection: 'categories',
-        doc: props.categoryID,
-        subcollections: [{ collection: 'subcategories' }],
-        storeAs: `${props.categoryID}-tasks`,
+        collection: 'users',
+        doc: props.uid,
+        subcollections: [
+          { collection: 'categories', doc: props.categoryID },
+          { collection: 'subcategories' },
+        ],
+        storeAs: `${props.categoryID}-subcategories`,
       },
     ];
   }),
   connect(({ firestore }, props) => {
     return {
-      category: firestore.data.categories[props.categoryID],
-      subcategories: firestore.ordered[`${props.categoryID}-tasks`] || [],
+      category: firestore.data[`${props.uid}-categories`][props.categoryID],
+      subcategories:
+        firestore.ordered[`${props.categoryID}-subcategories`] || [],
       firestore: firestore,
     };
   })

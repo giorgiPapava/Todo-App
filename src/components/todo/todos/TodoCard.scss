@@ -2,7 +2,7 @@
     border: 1px solid #C7C7C7;
     border-radius: 5px;
     width: 200px;
-    height: 120px;
+    min-height: 120px;
     padding: 30px 20px;
     display: flex;
     flex-direction: column;
@@ -35,12 +35,18 @@
         padding-top: 5px;
         font-weight: 500;
         line-height: 2.3rem;
+
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
     }
 
     span {
         font-weight: 300;
         color: grey;
         margin-top: 2px;
+        margin-bottom: 40px;
     }
 
     .todo-done-button {
