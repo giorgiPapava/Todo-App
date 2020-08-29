@@ -10,29 +10,31 @@ import NavLink from 'utils/NavLink';
 function Navigation() {
   return (
     <div className="navigation">
-      <nav>
-        <img
-          alt="avatar"
-          src="https://image.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg"
-          className="avatar"
-        />
-        <NavLink to="/">
-          <HomeIcon />
-        </NavLink>
-        <NavLink to="todo">
-          {/* for now it redirects to todo but I want it to redirect to first category*/}
-          <TodoIcon />
-        </NavLink>
-        <NavLink to="starred">
-          <StarIcon />
-        </NavLink>
-        <NavLink to="completed">
-          <CompletedIcon />
-        </NavLink>
-        <NavLink to="deleted">
-          <DeleteIcon />
-        </NavLink>
-      </nav>
+      <div className="nav-wrapper">
+        <nav>
+          <img
+            alt="avatar"
+            src="https://image.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg"
+            className="avatar"
+          />
+          <NavLink to="/">
+            <HomeIcon />
+          </NavLink>
+          <NavLink to="todo">
+            {/* for now it redirects to todo but I want it to redirect to first category*/}
+            <TodoIcon />
+          </NavLink>
+          <NavLink to="starred">
+            <StarIcon />
+          </NavLink>
+          <NavLink to="completed">
+            <CompletedIcon />
+          </NavLink>
+          <NavLink to="deleted">
+            <DeleteIcon />
+          </NavLink>
+        </nav>
+      </div>
     </div>
   );
 }

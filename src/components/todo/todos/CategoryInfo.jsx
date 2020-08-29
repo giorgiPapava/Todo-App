@@ -1,24 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-function CategoryInfo({ category }) {
-  const statuses = ["All Todo's", 'Upcoming', 'Completed', 'Others'];
+function CategoryInfo({ currentStatus, setCurrentStatus, todosLength }) {
+  const statuses = ["All Todo's", 'Upcoming', 'Completed'];
 
-  const [currentStatus, setCurrentStatus] = useState("All Todo's");
-
-  const handleStatusChange = (event) => {
-    setCurrentStatus(event.target.textContent);
-
-    // need algorithm to filter todo's
-  };
-
+  console.log(todosLength);
   return (
     <div className="category-info">
-      <h3>All Todos</h3>
+      <h3>
+        {todosLength > 0
+          ? todosLength > 1
+            ? todosLength + ' Todos'
+            : '1 Todo'
+          : 'No Todos'}
+      </h3>
       <div className="todo-status">
         {statuses.map((status) => (
           <button
             className={status === currentStatus ? 'active-status' : undefined}
-            onClick={handleStatusChange}
+            onClick={(event) => setCurrentStatus(event.target.textContent)}
             key={status}
           >
             {status}

@@ -8,6 +8,10 @@
     flex-direction: column;
     position: relative;
 
+    &.done-todo {
+        border-color: #DCB5B3;
+    }
+
     .actions {
         align-self: flex-end;
         position: absolute;
@@ -24,9 +28,13 @@
 
     .todo-status {
         text-transform: uppercase;
-        color: #56CA6C;
+        color: #6DB1F2;
         font-weight: 900;
         font-size: 1.5rem;
+
+        &.done-todo {
+            color: #56CA6C;
+        }
     }
 
     .todo-desc {
@@ -59,8 +67,13 @@
         border-radius: 20px;
         font-family: Roboto;
         font-weight: 500;
-        padding: 5px 10px;
+        padding: 5px 15px;
         cursor: pointer;
+
+        &.done-todo {
+            background-color: #F46058;
+            color: white;
+        }
     }
 
 }
