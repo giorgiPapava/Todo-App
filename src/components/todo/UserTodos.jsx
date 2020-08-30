@@ -46,7 +46,11 @@ function UserTodos({ uid, todos, subcategoryID, categories }) {
             setCurrentStatus={setCurrentStatus}
             todosLength={filteredTodos ? filteredTodos.length : todos.length}
           />
-          <TodosWrapper todos={filteredTodos || todos} uid={uid} />
+          <TodosWrapper
+            todos={filteredTodos || todos}
+            uid={uid}
+            categories={categories}
+          />
         </>
       )}
     </div>

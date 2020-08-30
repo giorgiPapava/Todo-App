@@ -3,7 +3,6 @@ import React from 'react';
 function CategoryInfo({ currentStatus, setCurrentStatus, todosLength }) {
   const statuses = ["All Todo's", 'Upcoming', 'Completed'];
 
-  console.log(todosLength);
   return (
     <div className="category-info">
       <h3>

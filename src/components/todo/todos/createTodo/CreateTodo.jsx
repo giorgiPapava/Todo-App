@@ -61,6 +61,7 @@ function CreateTodo({ uid, categories }) {
         date: showDate && selectedDate,
         description: todoName,
         status: 'todo',
+        categoryID: categoryID,
         subcategoryID: subcategoryID,
         timestamp: firebase.firestore.FieldValue.serverTimestamp(),
       })
@@ -132,6 +133,9 @@ function CreateTodo({ uid, categories }) {
                   value={categoryID}
                   onChange={(event) => setCategoryID(event.target.value)}
                 >
+                  <MenuItem value="no-category">
+                    <em>No category</em>
+                  </MenuItem>
                   {categories &&
                     Object.values(categories).map((category) => (
                       <MenuItem key={category.id} value={category.id}>
@@ -140,10 +144,9 @@ function CreateTodo({ uid, categories }) {
                     ))}
                 </TextField>
 
-                {categoryID && (
+                {categoryID && categoryID !== 'no-category' && (
                   <SubcategoriesSelect
                     categoryID={categoryID}
-                    uid={uid}
                     subID={subcategoryID}
                     setSubID={setSubcategoryID}
                   />
@@ -180,14 +183,20 @@ function CreateTodo({ uid, categories }) {
                         label="Time picker (optional)"
                         value={selectedTime}
                         onChange={(date) => {
-                          setSelectedDate(
-                            new Date(
-                              selectedDate.setHours(
-                                date.getHours(),
-                                date.getMinutes()
+                          if (!date) {
+                            selectedDate && selectedDate.setHours(0);
+                            selectedDate && selectedDate.setMinutes(0);
+                            setSelectedDate(selectedDate);
+                          }
+                          date &&
+                            setSelectedDate(
+                              new Date(
+                                selectedDate.setHours(
+                                  date.getHours(),
+                                  date.getMinutes()
+                                )
                               )
-                            )
-                          );
+                            );
                           setSelectedTime(date);
                         }}
                         KeyboardButtonProps={{

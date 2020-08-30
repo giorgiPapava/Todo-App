@@ -3,12 +3,13 @@ import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { TextField, MenuItem } from '@material-ui/core';
 
-function SubcategoriesSelect({ subID, setSubID, subcategories }) {
+function SubcategoriesSelect({ subID, setSubID, subcategories, variant }) {
   return (
     <TextField
+      fullWidth
       select
       required
-      variant="filled"
+      variant={variant ? variant : 'filled'}
       labelid="subcategory-name-label"
       id="subcategory-name"
       label="Subcategory"
@@ -17,7 +18,11 @@ function SubcategoriesSelect({ subID, setSubID, subcategories }) {
     >
       {subcategories &&
         Object.values(subcategories).map((subcategory) => (
-          <MenuItem value={subcategory.id} id={subcategory.id}>
+          <MenuItem
+            value={subcategory.id}
+            id={subcategory.id}
+            key={subcategory.id}
+          >
             <em>{subcategory.subcategoryName}</em>
           </MenuItem>
         ))}

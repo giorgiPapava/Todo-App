@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import moment from 'moment';
-// import EditIcon from '@material-ui/icons/Edit';
+import EditIcon from '@material-ui/icons/Edit';
 import ClearIcon from '@material-ui/icons/Clear';
 import { db } from 'config/firebaseConfig';
 import swalConfirm from 'utils/swalConfirm';
+import EditTodo from './EditTodo';
 
-function TodoCard({ status, description, date, todoID, uid }) {
+function TodoCard({
+  status,
+  description,
+  date,
+  todoID,
+  uid,
+  categoryID,
+  subcategoryID,
+  categories,
+}) {
+  const [openEdit, setOpenEdit] = useState(false);
   const changeStatus = () => {
     db.collection('users')
       .doc(uid)
@@ -33,13 +44,28 @@ function TodoCard({ status, description, date, todoID, uid }) {
   return (
     <div className={`todo-card ${status === 'done' && 'done-todo'}`}>
       <div className="actions">
-        {/* <EditIcon /> */}
+        <EditIcon onClick={() => setOpenEdit(true)} />
         <ClearIcon onClick={handleDelete} className="remove" />
       </div>
       <p className={`todo-status ${status === 'done' && 'done-todo'}`}>
         {status}
       </p>
+
       <h4 className="todo-desc">{description}</h4>
+      {openEdit && (
+        <EditTodo
+          open={openEdit}
+          handleClose={() => setOpenEdit(false)}
+          description={description}
+          categoryID={categoryID}
+          subcategoryID={subcategoryID}
+          categories={categories}
+          date={date}
+          uid={uid}
+          todoID={todoID}
+        />
+      )}
+
       {date && (
         <span>
           {(todoDate && hours > 0) || minutes > 0

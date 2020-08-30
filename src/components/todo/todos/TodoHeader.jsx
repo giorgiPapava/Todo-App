@@ -19,9 +19,7 @@ function TodoHeader({ uid, categories, todos }) {
         </div>
       )}
 
-      {categories?.length > 0 && (
-        <CreateTodo uid={uid} categories={categories} />
-      )}
+      <CreateTodo uid={uid} categories={categories} />
     </div>
   );
 }
