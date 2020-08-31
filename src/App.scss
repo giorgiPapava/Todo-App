@@ -3,6 +3,7 @@
 html {
   font-size: 62.5%;
   font-family: Roboto;
+  overflow-x: hidden;
 }
 
 .app {
@@ -82,5 +83,3 @@ html {
   }
 
 }
-
-@import 'components/layout/Navigation', 'components/todo/Todo', 'components/todo/UserTodos', 'components/todo/todos/TodoCard', 'components/auth/Sign', 'components/layout/Loading', 'components/todo/categories/CreateCategory', 'components/todo/todos/createTodo/CreateTodo';

@@ -6,6 +6,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import sortTodos from 'utils/sortTodos';
+import './UserTodos.scss';
 
 function UserTodos({ uid, todos, subcategoryID, categories }) {
   const [currentStatus, setCurrentStatus] = useState("All Todo's");

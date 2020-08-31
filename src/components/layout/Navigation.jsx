@@ -6,6 +6,7 @@ import StarIcon from '@material-ui/icons/Star';
 import CompletedIcon from '@material-ui/icons/AssignmentTurnedIn';
 import DeleteIcon from '@material-ui/icons/Delete';
 import NavLink from 'utils/NavLink';
+import './Navigation.scss';
 
 function Navigation() {
   return (

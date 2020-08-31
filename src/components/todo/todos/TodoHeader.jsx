@@ -2,10 +2,11 @@ import React from 'react';
 import SearchIcon from '@material-ui/icons/Search';
 import { InputBase } from '@material-ui/core';
 import CreateTodo from './createTodo/CreateTodo';
+import './TodoHeader.scss';
 
 function TodoHeader({ uid, categories, todos }) {
   return (
-    <div className="userTodo-header">
+    <div className="todo-header">
       {todos && (
         <div className="search">
           <div className="searchIcon">

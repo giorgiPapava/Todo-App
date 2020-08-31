@@ -5,6 +5,7 @@ import ClearIcon from '@material-ui/icons/Clear';
 import { db } from 'config/firebaseConfig';
 import swalConfirm from 'utils/swalConfirm';
 import EditTodo from './EditTodo';
+import './TodoCard.scss';
 
 function TodoCard({
   status,

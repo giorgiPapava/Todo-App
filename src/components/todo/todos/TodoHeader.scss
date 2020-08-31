@@ -1,0 +1,49 @@
+    .todo-header {
+        display: flex;
+        justify-content: space-between;
+
+        .add-todo {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        button {
+            margin: 15px 30px;
+            background-color: #FE5E57;
+            border-radius: 20px;
+            border: none;
+            padding: 8px 20px;
+            color: white;
+            font-weight: 500;
+            font-family: Roboto;
+            font-size: 1.4rem;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .search {
+            margin: 15px 0;
+            flex: 1;
+            min-width: 200px;
+            max-width: 500px;
+            display: flex;
+            border: 1px solid #B3B3C1;
+            border-radius: 20px;
+            padding: 5px 20px;
+
+            svg {
+                font-size: 2rem;
+                vertical-align: -15px;
+                margin-right: 10px;
+                cursor: default;
+            }
+
+            .MuiInputBase-root {
+                flex: 1;
+            }
+
+            input {
+                font-size: 1.4rem;
+            }
+        }
+    }

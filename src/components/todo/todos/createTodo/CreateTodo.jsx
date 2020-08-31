@@ -8,6 +8,7 @@ import AddIcon from '@material-ui/icons/Add';
 import DateFnsUtils from '@date-io/date-fns';
 import PostAddIcon from '@material-ui/icons/PostAdd';
 import firebase from 'config/firebaseConfig';
+import './CreateTodo.scss';
 
 import {
   MuiPickersUtilsProvider,

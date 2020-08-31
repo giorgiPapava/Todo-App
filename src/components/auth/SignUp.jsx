@@ -5,6 +5,7 @@ import { Link, Redirect } from '@reach/router';
 import { connect } from 'react-redux';
 import { signUp } from 'store/actions/authActions';
 import Loading from 'components/layout/Loading';
+import './Sign.scss';
 
 function SignUp({ firebase, signUp, authError }) {
   const classes = useStyles();

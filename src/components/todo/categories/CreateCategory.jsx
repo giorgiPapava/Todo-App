@@ -18,6 +18,7 @@ import { db } from 'config/firebaseConfig';
 import swallSuccess from 'utils/swalSuccess';
 import swallFailure from 'utils/swalFailure';
 import firebase from 'config/firebaseConfig';
+import './CreateCategory.scss';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
