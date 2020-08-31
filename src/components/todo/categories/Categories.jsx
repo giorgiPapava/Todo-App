@@ -24,36 +24,6 @@ function Categories({ categories, uid, showCategories }) {
             )
           );
         })}
-      {categories &&
-        Object.values(categories).map((category) => {
-          return (
-            category && (
-              <div key={category.id} className="category-row">
-                <SubCategories categoryID={category.id} uid={uid} />
-              </div>
-            )
-          );
-        })}{' '}
-      {categories &&
-        Object.values(categories).map((category) => {
-          return (
-            category && (
-              <div key={category.id} className="category-row">
-                <SubCategories categoryID={category.id} uid={uid} />
-              </div>
-            )
-          );
-        })}
-      {categories &&
-        Object.values(categories).map((category) => {
-          return (
-            category && (
-              <div key={category.id} className="category-row">
-                <SubCategories categoryID={category.id} uid={uid} />
-              </div>
-            )
-          );
-        })}
     </div>
   );
 }
