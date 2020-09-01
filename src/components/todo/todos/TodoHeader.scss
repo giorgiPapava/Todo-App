@@ -24,7 +24,6 @@
         .search {
             margin: 15px 0;
             flex: 1;
-            min-width: 200px;
             max-width: 500px;
             display: flex;
             border: 1px solid #B3B3C1;
@@ -45,5 +44,21 @@
             input {
                 font-size: 1.4rem;
             }
+        }
+    }
+
+    @media screen and (max-width: 750px) {
+        .todo-header {
+            flex-direction: column;
+        }
+    }
+
+    @media screen and (max-width: 600px) {
+        .search {
+            margin: 10px 0 !important;
+        }
+
+        .category-info h3 {
+            font-size: 2.5rem !important;
         }
     }

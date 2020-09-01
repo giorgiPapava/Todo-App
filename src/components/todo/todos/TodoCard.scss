@@ -1,7 +1,8 @@
 .todo-card {
     border: 1px solid #C7C7C7;
     border-radius: 5px;
-    width: 200px;
+    flex-basis: 25%;
+    min-width: 200px;
     min-height: 120px;
     padding: 30px 20px;
     display: flex;
@@ -77,4 +78,16 @@
         }
     }
 
+}
+
+@media screen and (max-width: 1220px) {
+    .todo-card {
+        flex-basis: 40%;
+    }
+}
+
+@media screen and (max-width: 720px) {
+    .todo-card {
+        flex-basis: 55%;
+    }
 }
