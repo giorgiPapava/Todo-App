@@ -12,6 +12,11 @@
         div.MuiFormControl-root {
             margin: 10px 0;
         }
-
     }
+}
+
+.date-picker {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
 }
