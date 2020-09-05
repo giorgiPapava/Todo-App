@@ -9,8 +9,6 @@ import './Todo.scss';
 function Todo({ auth }) {
   const [showCategories, setShowCategoreis] = useState(true);
 
-  console.log(showCategories);
-
   if (auth.isLoaded && !auth.uid) {
     return <Redirect noThrow to="/signin" />;
   } else if (!auth.isLoaded) {

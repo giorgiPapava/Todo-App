@@ -12,6 +12,9 @@ function UserTodos({ uid, todos, subcategoryID, categories }) {
   const [currentStatus, setCurrentStatus] = useState("All Todo's");
   const [filteredTodos, setFilteredTodos] = useState(null);
 
+  const [searchInput, setSearchInput] = useState('');
+  const [searchedTodos, setSearchedTodos] = useState(null);
+
   useEffect(() => {
     switch (currentStatus) {
       case "All Todo's":
@@ -31,6 +34,26 @@ function UserTodos({ uid, todos, subcategoryID, categories }) {
     }
   }, [todos, currentStatus]);
 
+  useEffect(() => {
+    if (searchInput && filteredTodos) {
+      setSearchedTodos(
+        filteredTodos.filter(
+          ({ description: todo }) =>
+            todo.toLowerCase().indexOf(searchInput.toLowerCase()) > -1
+        )
+      );
+    } else if (searchInput) {
+      setSearchedTodos(
+        todos.filter(
+          ({ description: todo }) =>
+            todo.toLowerCase().indexOf(searchInput.toLowerCase()) > -1
+        )
+      );
+    } else {
+      setSearchedTodos(null);
+    }
+  }, [searchInput, filteredTodos, todos]);
+
   todos = todos && sortTodos(todos);
   if (subcategoryID && todos) {
     todos = Object.values(todos).filter(
@@ -39,16 +62,28 @@ function UserTodos({ uid, todos, subcategoryID, categories }) {
   }
   return (
     <div className="user-todos">
-      <TodoHeader todos={todos?.length > 0} uid={uid} categories={categories} />
+      <TodoHeader
+        todos={todos?.length > 0}
+        uid={uid}
+        categories={categories}
+        searchInput={searchInput}
+        setSearchInput={setSearchInput}
+      />
       {todos?.length > 0 && (
         <>
           <CategoryInfo
             currentStatus={currentStatus}
             setCurrentStatus={setCurrentStatus}
-            todosLength={filteredTodos ? filteredTodos.length : todos.length}
+            todosLength={
+              searchedTodos
+                ? searchedTodos.length
+                : filteredTodos
+                ? filteredTodos.length
+                : todos.length
+            }
           />
           <TodosWrapper
-            todos={filteredTodos || todos}
+            todos={searchedTodos || filteredTodos || todos}
             uid={uid}
             categories={categories}
           />

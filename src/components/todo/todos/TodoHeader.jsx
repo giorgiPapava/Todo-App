@@ -4,7 +4,7 @@ import { InputBase } from '@material-ui/core';
 import CreateTodo from './createTodo/CreateTodo';
 import './TodoHeader.scss';
 
-function TodoHeader({ uid, categories, todos }) {
+function TodoHeader({ uid, categories, todos, searchInput, setSearchInput }) {
   return (
     <div className="todo-header">
       {todos && (
@@ -16,6 +16,8 @@ function TodoHeader({ uid, categories, todos }) {
           <InputBase
             placeholder="Search Here"
             inputProps={{ 'aria-label': 'search' }}
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
           />
         </div>
       )}
