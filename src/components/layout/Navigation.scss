@@ -1,64 +1,68 @@
 .navigation {
-    background-color: #2831A6;
+  background-color: #2831a6;
+  width: 100px;
+  min-height: 100vh;
+  height: 100%;
+
+  nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    height: 80%;
+    position: fixed;
+    margin: 0 auto;
     width: 100px;
-    min-height: 100vh;
-    height: 100%;
+  }
 
-    nav {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-around;
-        height: 80%;
-        position: fixed;
-        margin: 0 auto;
-        width: 100px;
+  .avatar {
+    width: 5rem;
+    border-radius: 50%;
+
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+  }
+
+  a {
+    outline: none;
+    color: inherit;
+
+    svg {
+      color: inherit;
+      font-size: 30px;
+      cursor: pointer;
+
+      &:hover {
+        color: #ecc927;
+      }
     }
-
-
-    .avatar {
-        width: 5rem;
-        border-radius: 50%;
-    }
-
-    a {
-        outline: none;
-        color: inherit;
-
-        svg {
-            color: inherit;
-            font-size: 30px;
-            cursor: pointer;
-
-            &:hover {
-                color: #ECC927;
-            }
-        }
-
-    }
+  }
 }
 
 @media screen and (max-width: 600px) {
-    .navigation {
-        min-height: initial;
-        height: initial;
-        width: 100%;
-        padding: 15px 0;
+  .navigation {
+    min-height: initial;
+    height: initial;
+    width: 100%;
+    padding: 15px 0;
 
-        nav {
-            flex-direction: row;
-            height: initial;
-            width: 80%;
-            min-width: 320px;
-            position: initial;
+    nav {
+      flex-direction: row;
+      height: initial;
+      width: 80%;
+      min-width: 320px;
+      position: initial;
 
-            .avatar {
-                width: 3.5rem;
-            }
+      .avatar {
+        width: 3.5rem;
+      }
 
-            svg {
-                font-size: 2.5rem;
-            }
-        }
+      svg {
+        font-size: 2.5rem;
+      }
     }
+  }
 }

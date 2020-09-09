@@ -2,7 +2,7 @@
     border: 1px solid #C7C7C7;
     border-radius: 5px;
     flex-basis: 25%;
-    min-width: 200px;
+    width: 200px;
     min-height: 120px;
     padding: 30px 20px;
     display: flex;
@@ -17,13 +17,21 @@
         align-self: flex-end;
         position: absolute;
 
+
         svg {
             font-size: 2rem;
             color: #483946;
+
+            &:hover {
+                -webkit-animation: swing 1s ease;
+                animation: swing 1s ease;
+                -webkit-animation-iteration-count: 1;
+                animation-iteration-count: 1;
+            }
         }
 
         svg.remove {
-            color: red
+            color: red;
         }
     }
 
@@ -71,6 +79,13 @@
         font-weight: 500;
         padding: 5px 15px;
         cursor: pointer;
+        transition: all .2s ease-in-out;
+
+        &:hover {
+            background-color: #F46458;
+            color: white;
+        }
+
 
         &.done-todo {
             background-color: #F46058;

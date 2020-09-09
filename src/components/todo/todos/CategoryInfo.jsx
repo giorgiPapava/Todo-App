@@ -1,7 +1,7 @@
 import React from 'react';
 
 function CategoryInfo({ currentStatus, setCurrentStatus, todosLength }) {
-  const statuses = ["All Todo's", 'Upcoming', 'Completed'];
+  const statuses = ['Upcoming', 'Completed', "All Todo's"];
 
   return (
     <div className="category-info">

@@ -7,17 +7,31 @@ import CompletedIcon from '@material-ui/icons/AssignmentTurnedIn';
 import DeleteIcon from '@material-ui/icons/Delete';
 import NavLink from 'utils/NavLink';
 import './Navigation.scss';
+import todoLogo from 'images/todo.jpg';
+import { motion } from 'framer-motion';
 
 function Navigation() {
   return (
     <div className="navigation">
       <div className="nav-wrapper">
         <nav>
-          <img
-            alt="avatar"
-            src="https://image.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg"
-            className="avatar"
-          />
+          <motion.div
+            whileHover={{
+              scale: [1, 1.2, 1.2, 1, 1],
+              rotate: [0, 0, 360, 360, 0],
+            }}
+            transition={{ duration: 1 }}
+            whileTap={{ scale: 0.9 }}
+          >
+            <img
+              onDragStart={(e) => {
+                e.preventDefault();
+              }}
+              alt="avatar"
+              src={todoLogo}
+              className="avatar"
+            />
+          </motion.div>
           <NavLink to="/">
             <HomeIcon />
           </NavLink>

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Redirect, Router } from '@reach/router';
+import React, { useState, useEffect } from 'react';
+import { Redirect, Router, globalHistory } from '@reach/router';
 import { connect } from 'react-redux';
 import Loading from 'components/layout/Loading';
 import Categories from './categories/Categories';
@@ -7,7 +7,12 @@ import UserTodos from './UserTodos';
 import './Todo.scss';
 
 function Todo({ auth }) {
+  const [currentStatus, setCurrentStatus] = useState("All Todo's");
   const [showCategories, setShowCategoreis] = useState(true);
+
+  useEffect(() => {
+    return globalHistory.listen(() => setCurrentStatus("All Todo's"));
+  }, []);
 
   if (auth.isLoaded && !auth.uid) {
     return <Redirect noThrow to="/signin" />;
@@ -29,8 +34,18 @@ function Todo({ auth }) {
 
       <div className={`todo-main ${showCategories ? 'hidden' : ''}`}>
         <Router>
-          <UserTodos path="/" uid={auth.uid} />
-          <UserTodos path="/:categoryID/:subcategoryID" uid={auth.uid} />
+          <UserTodos
+            path="/"
+            uid={auth.uid}
+            currentStatus={currentStatus}
+            setCurrentStatus={setCurrentStatus}
+          />
+          <UserTodos
+            path="/:categoryID/:subcategoryID"
+            uid={auth.uid}
+            currentStatus={currentStatus}
+            setCurrentStatus={setCurrentStatus}
+          />
         </Router>
       </div>
     </div>

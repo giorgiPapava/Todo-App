@@ -30,6 +30,12 @@
                 border-radius: 10px;
                 border: 1px solid #F46458;
                 cursor: pointer;
+                transition: all .2s ease-in-out;
+
+                &:hover {
+                    box-shadow: inset 0 0 0 25px #F46458;
+                    color: white;
+                }
 
                 svg {
                     font-size: 2rem;
@@ -99,6 +105,13 @@
                     margin-top: 5px;
                     color: red;
                     font-size: 2rem;
+
+                    &:hover {
+                        -webkit-animation: swing 1s ease;
+                        animation: swing 1s ease;
+                        -webkit-animation-iteration-count: 1;
+                        animation-iteration-count: 1;
+                    }
                 }
             }
 

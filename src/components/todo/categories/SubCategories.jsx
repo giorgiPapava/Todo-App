@@ -7,6 +7,7 @@ import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
 import { db } from 'config/firebaseConfig';
 import swalConfirm from 'utils/swalConfirm';
+import { motion } from 'framer-motion';
 
 function SubCategories({
   firestore,

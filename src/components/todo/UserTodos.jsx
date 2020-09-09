@@ -8,8 +8,14 @@ import { firestoreConnect } from 'react-redux-firebase';
 import sortTodos from 'utils/sortTodos';
 import './UserTodos.scss';
 
-function UserTodos({ uid, todos, subcategoryID, categories }) {
-  const [currentStatus, setCurrentStatus] = useState("All Todo's");
+function UserTodos({
+  uid,
+  todos,
+  subcategoryID,
+  categories,
+  currentStatus,
+  setCurrentStatus,
+}) {
   const [filteredTodos, setFilteredTodos] = useState(null);
 
   const [searchInput, setSearchInput] = useState('');
