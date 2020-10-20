@@ -4,7 +4,8 @@
         overflow: scroll;
         -ms-overflow-style: none;
         scrollbar-width: none;
-
+        flex: 1;
+        min-width: 350px;
 
         &::-webkit-scrollbar {
             display: none;
@@ -13,7 +14,6 @@
         // end of scroll functionality
 
         background-color: #F8F7FC;
-        min-width: 250px;
 
         font-family: 'Roboto',
         sans-serif;
@@ -121,8 +121,8 @@
 
             a {
                 text-decoration: none;
-                font-size: 1.6rem;
-                padding: 7px 0;
+                font-size: 1.5rem;
+                padding: 7px;
                 font-weight: 300;
                 cursor: pointer;
                 display: block;

@@ -1,14 +1,40 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import TodoCard from './TodoCard';
 import FlipMove from 'react-flip-move';
 
-function Todos({ todos, uid, categories }) {
+function Todos({ todos, uid, categories, currentPage, setCurrentPage }) {
+  const [todosOnPage, setTodosOnPage] = useState([]);
+
+  useEffect(() => {
+    const first = (currentPage - 1) * maxPerPage;
+    const last = currentPage * maxPerPage;
+
+    setTodosOnPage(todos.slice(first, last));
+  }, [currentPage, todos]);
+
+  const maxPerPage = 6;
+  const pages = Math.ceil(todos.length / maxPerPage);
+
   return (
     <div className="todo-cards">
-      {todos &&
-        Object.values(todos).map((todo) => {
-          return (
-            <FlipMove>
+      {todos.length > maxPerPage && (
+        <ul className="todos-pagination">
+          {Array.from({ length: pages }, (x, i) => (
+            <li
+              key={i + 1}
+              onClick={() => setCurrentPage(i + 1)}
+              className={i + 1 === currentPage ? 'active' : ''}
+            >
+              {i + 1}
+            </li>
+          ))}
+        </ul>
+      )}
+
+      <FlipMove>
+        {todos &&
+          Object.values(todosOnPage).map((todo) => {
+            return (
               <TodoCard
                 todoID={todo.id}
                 key={todo.id}
@@ -20,9 +46,9 @@ function Todos({ todos, uid, categories }) {
                 uid={uid}
                 categories={categories}
               />
-            </FlipMove>
-          );
-        })}
+            );
+          })}
+      </FlipMove>
     </div>
   );
 }

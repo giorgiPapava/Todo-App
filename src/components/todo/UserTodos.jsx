@@ -21,7 +21,10 @@ function UserTodos({
   const [searchInput, setSearchInput] = useState('');
   const [searchedTodos, setSearchedTodos] = useState(null);
 
+  const [currentPage, setCurrentPage] = useState(1);
+
   useEffect(() => {
+    setCurrentPage(1);
     switch (currentStatus) {
       case "All Todo's":
         setFilteredTodos(null);
@@ -89,6 +92,8 @@ function UserTodos({
             }
           />
           <TodosWrapper
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
             todos={searchedTodos || filteredTodos || todos}
             uid={uid}
             categories={categories}
