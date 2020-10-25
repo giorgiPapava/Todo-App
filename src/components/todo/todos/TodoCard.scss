@@ -1,109 +1,106 @@
 .todo-card {
-    border: 1px solid #C7C7C7;
-    border-radius: 5px;
-    flex-basis: 25%;
-    width: 200px;
-    min-height: 120px;
-    padding: 30px 20px;
-    display: flex;
-    flex-direction: column;
-    position: relative;
+  border: 1px solid #c7c7c7;
+  border-radius: 5px;
+  flex-basis: 25%;
+  width: 200px;
+  min-height: 120px;
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  &.done-todo {
+    border-color: #dcb5b3;
+  }
+
+  .actions {
+    align-self: flex-end;
+    position: absolute;
+
+    svg {
+      font-size: 2rem;
+      color: #483946;
+
+      &:hover {
+        -webkit-animation: swing 1s ease;
+        animation: swing 1s ease;
+        -webkit-animation-iteration-count: 1;
+        animation-iteration-count: 1;
+      }
+    }
+
+    svg.remove {
+      color: red;
+    }
+  }
+
+  .todo-status {
+    text-transform: uppercase;
+    color: #6db1f2;
+    font-weight: 900;
+    font-size: 1.5rem;
+    margin-bottom: 5px;
 
     &.done-todo {
-        border-color: #DCB5B3;
+      color: #56ca6c;
+    }
+  }
+
+  .todo-desc {
+    color: #5b3e4d;
+    font-size: 1.6rem;
+    padding-top: 5px;
+    font-weight: 500;
+    line-height: 2.3rem;
+
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+
+  span {
+    font-weight: 300;
+    color: grey;
+    margin-top: 2px;
+    margin-bottom: 40px;
+  }
+
+  .todo-done-button {
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 20px;
+    color: #ff5b58;
+    background-color: white;
+    border: 1px solid #ff5b58;
+    border-radius: 20px;
+    font-family: Roboto;
+    font-weight: 500;
+    padding: 5px 15px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      background-color: #f46458;
+      color: white;
     }
 
-    .actions {
-        align-self: flex-end;
-        position: absolute;
-
-
-        svg {
-            font-size: 2rem;
-            color: #483946;
-
-            &:hover {
-                -webkit-animation: swing 1s ease;
-                animation: swing 1s ease;
-                -webkit-animation-iteration-count: 1;
-                animation-iteration-count: 1;
-            }
-        }
-
-        svg.remove {
-            color: red;
-        }
+    &.done-todo {
+      background-color: #f46058;
+      color: white;
     }
-
-    .todo-status {
-        text-transform: uppercase;
-        color: #6DB1F2;
-        font-weight: 900;
-        font-size: 1.5rem;
-        margin-bottom: 5px;
-
-        &.done-todo {
-            color: #56CA6C;
-        }
-    }
-
-    .todo-desc {
-        color: #5B3E4D;
-        font-size: 1.6rem;
-        padding-top: 5px;
-        font-weight: 500;
-        line-height: 2.3rem;
-
-        overflow: hidden;
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
-    }
-
-    span {
-        font-weight: 300;
-        color: grey;
-        margin-top: 2px;
-        margin-bottom: 40px;
-    }
-
-    .todo-done-button {
-        position: absolute;
-        bottom: 0;
-        margin-bottom: 20px;
-        color: #FF5B58;
-        background-color: white;
-        border: 1px solid #FF5B58;
-        border-radius: 20px;
-        font-family: Roboto;
-        font-weight: 500;
-        padding: 5px 15px;
-        cursor: pointer;
-        transition: all .2s ease-in-out;
-
-        &:hover {
-            background-color: #F46458;
-            color: white;
-        }
-
-
-        &.done-todo {
-            background-color: #F46058;
-            color: white;
-        }
-    }
-
+  }
 }
 
 @media screen and (max-width: 1220px) {
-    .todo-card {
-        flex-basis: 40%;
-        margin-bottom: 20px !important;
-    }
+  .todo-card {
+    flex-basis: 40%;
+    margin-bottom: 20px !important;
+  }
 }
 
 @media screen and (max-width: 720px) {
-    .todo-card {
-        flex-basis: 55%;
-    }
+  .todo-card {
+    flex-basis: 55%;
+  }
 }

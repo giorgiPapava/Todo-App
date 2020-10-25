@@ -15,7 +15,7 @@ function Todo({ auth }) {
   }, []);
 
   if (auth.isLoaded && !auth.uid) {
-    return <Redirect noThrow to="/signin" />;
+    return <Redirect noThrow to="/" />;
   } else if (!auth.isLoaded) {
     return <Loading />;
   }

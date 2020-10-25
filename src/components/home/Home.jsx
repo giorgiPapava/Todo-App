@@ -1,19 +1,46 @@
 import React from 'react';
-import { Redirect } from '@reach/router';
+import { navigate } from '@reach/router';
 import { connect } from 'react-redux';
-import { signOut } from 'store/actions/authActions';
+
+import { signInWithGoogle, signOut } from 'store/actions/authActions';
+
 import Loading from 'components/layout/Loading';
 
-function Home({ firebase, signOut }) {
+import 'components/home/Home.scss';
+
+function Home({ firebase, signOut, signInWithGoogle }) {
   if (firebase.auth.isLoaded && !firebase.auth.uid) {
-    return <Redirect noThrow to="signin" />;
+    return (
+      <div className="Home">
+        <h2>You are not authorized</h2>
+        <p>To view and create your tasks please Sign in or Sign Up</p>
+        <div className="sign-buttons">
+          <button onClick={() => navigate('/signin')}>Sign In</button>
+          <button onClick={() => navigate('/signup')}>Sign Up</button>
+        </div>
+        <button
+          onClick={() => {
+            signInWithGoogle();
+          }}
+          className="google-button"
+        >
+          Sign In With Google
+        </button>
+      </div>
+    );
   } else if (!firebase.auth.isLoaded) {
     return <Loading />;
   }
   return (
     <div className="Home">
-      <h2>Welcome back {firebase.profile.firstname}</h2>
-      <button onClick={signOut}>Log Out</button>
+      <h2>
+        Welcome back {firebase.profile.firstname || firebase.auth.displayName}
+      </h2>
+      <p>See your tasks for today.</p>
+      <button onClick={() => navigate('/todo')}>Tasks</button>
+      <button className="logout-button" onClick={signOut}>
+        Log Out
+      </button>
     </div>
   );
 }
@@ -25,6 +52,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     signOut: () => dispatch(signOut()),
+    signInWithGoogle: () => dispatch(signInWithGoogle()),
   };
 };
 

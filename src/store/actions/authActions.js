@@ -1,4 +1,4 @@
-import firebase from 'firebase/app';
+import firebase, { auth } from 'firebase/app';
 
 export const signIn = (credintials) => {
   return (dispatch, getState) => {
@@ -9,6 +9,21 @@ export const signIn = (credintials) => {
         dispatch({ type: 'LOGIN_SUCCESS' });
       })
       .catch((error) => {
+        dispatch({ type: 'LOGIN_ERROR', error });
+      });
+  };
+};
+
+export const signInWithGoogle = (provider) => {
+  return (dispatch, getState) => {
+    const provider = new auth.GoogleAuthProvider();
+    console.log(provider);
+    auth()
+      .signInWithPopup(provider)
+      .then((result) => {
+        dispatch({ type: 'LOGIN_SUCCESS' });
+      })
+      .catch(function (error) {
         dispatch({ type: 'LOGIN_ERROR', error });
       });
   };
