@@ -1,0 +1,47 @@
+.deleted-todos {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin: 20px auto;
+
+  .todo {
+    position: relative;
+    border: 1px solid grey;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0 25px 15px;
+    margin-bottom: 20px;
+
+    p {
+      color: #5b3e4d;
+      font-size: 2.5rem;
+      font-weight: 500;
+      line-height: 2.3rem;
+      margin-right: 25px;
+    }
+
+    .buttons {
+      display: flex;
+      padding: 5px;
+
+      button {
+        background: transparent;
+        border: none;
+        outline: none;
+        font-size: 1.3rem;
+        display: flex;
+        cursor: pointer;
+
+        svg {
+          font-size: 2rem;
+          margin-left: 5px;
+        }
+      }
+    }
+    span {
+      position: absolute;
+      bottom: 5px;
+      right: 10px;
+    }
+  }
+}

@@ -43,6 +43,7 @@ function Todos({ todos, uid, categories, currentPage, setCurrentPage }) {
                 date={todo.date}
                 categoryID={todo.categoryID}
                 subcategoryID={todo.subcategoryID}
+                timestamp={todo.timestamp}
                 uid={uid}
                 categories={categories}
               />

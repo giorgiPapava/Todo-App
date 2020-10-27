@@ -34,7 +34,7 @@ function Home({ firebase, signOut, signInWithGoogle }) {
   return (
     <div className="Home">
       <h2>
-        Welcome back {firebase.profile.firstname || firebase.auth.displayName}
+        Welcome back {firebase.auth.displayName || firebase.profile.firstname}
       </h2>
       <p>See your tasks for today.</p>
       <button onClick={() => navigate('/todo')}>Tasks</button>

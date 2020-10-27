@@ -6,6 +6,7 @@ import { db } from 'config/firebaseConfig';
 import swalConfirm from 'utils/swalConfirm';
 import EditTodo from './EditTodo';
 import './TodoCard.scss';
+import { firestore } from 'firebase';
 
 const TodoCard = forwardRef(
   (
@@ -18,6 +19,7 @@ const TodoCard = forwardRef(
       categoryID,
       subcategoryID,
       categories,
+      timestamp,
     },
     ref
   ) => {
@@ -34,7 +36,24 @@ const TodoCard = forwardRef(
     const hours = todoDate.getHours();
     const minutes = todoDate.getMinutes();
 
-    const succesFunction = () => {
+    const moveToDeleted = () => {
+      return db
+        .collection('users')
+        .doc(uid)
+        .collection('deleted-todos')
+        .doc(todoID)
+        .set({
+          categoryID,
+          date,
+          description,
+          status,
+          timestamp: firestore.FieldValue.serverTimestamp(),
+          subcategoryID: subcategoryID || '',
+        });
+    };
+
+    const deleteFunction = () => {
+      moveToDeleted();
       return db
         .collection('users')
         .doc(uid)
@@ -44,7 +63,7 @@ const TodoCard = forwardRef(
     };
 
     const handleDelete = () => {
-      swalConfirm('todo', succesFunction);
+      swalConfirm('todo', deleteFunction, moveToDeleted);
     };
     return (
       <div
