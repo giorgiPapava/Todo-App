@@ -46,6 +46,7 @@ function Todos({ todos, uid, categories, currentPage, setCurrentPage }) {
                 timestamp={todo.timestamp}
                 uid={uid}
                 categories={categories}
+                starred={todo.starred}
               />
             );
           })}
