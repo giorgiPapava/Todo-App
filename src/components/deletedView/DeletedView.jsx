@@ -6,6 +6,8 @@ import DeletedTodos from './deletedTodos/DeletedTodos';
 import Loading from 'components/layout/Loading';
 
 function DeletedView({ auth }) {
+  React.useEffect(() => window.scrollTo(0, 0), []);
+
   if (auth.isLoaded && !auth.uid) {
     return <Redirect noThrow to="/" />;
   } else if (!auth.isLoaded) {

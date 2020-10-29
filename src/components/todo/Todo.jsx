@@ -10,6 +10,8 @@ function Todo({ auth }) {
   const [currentStatus, setCurrentStatus] = useState("All Todo's");
   const [showCategories, setShowCategoreis] = useState(true);
 
+  useEffect(() => window.scrollTo(0, 0), []);
+
   useEffect(() => {
     return globalHistory.listen(() => setCurrentStatus("All Todo's"));
   }, []);

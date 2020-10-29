@@ -16,7 +16,7 @@ function App() {
         <Navigation />
       </header>
       <main>
-        <Router>
+        <Router primary={false}>
           <Home path="/" />
           <SignUp path="/signup" />
           <SignIn path="/signin" />
