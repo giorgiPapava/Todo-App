@@ -14,7 +14,7 @@ function Categories({ categories, uid, showCategories }) {
   return (
     <div className={`todo-categories ${showCategories && 'active'}`}>
       <CreateCategory categories={categories} userID={uid} />
-      {categories &&
+      {categories.length > 0 ? (
         Object.values(categories).map((category) => {
           return (
             category && (
@@ -23,7 +23,19 @@ function Categories({ categories, uid, showCategories }) {
               </div>
             )
           );
-        })}
+        })
+      ) : (
+        <h2
+          style={{
+            fontSize: '1.5rem',
+            color: 'rgb(72, 57, 70)',
+            textAlign: 'center',
+            padding: '30px',
+          }}
+        >
+          Start by pressing "+" button to create categories and subcategories.
+        </h2>
+      )}
     </div>
   );
 }

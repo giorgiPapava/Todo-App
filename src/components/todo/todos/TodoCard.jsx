@@ -56,6 +56,7 @@ const TodoCard = forwardRef(
           status,
           timestamp: firestore.FieldValue.serverTimestamp(),
           subcategoryID: subcategoryID || '',
+          starred: starred || false,
         });
     };
 

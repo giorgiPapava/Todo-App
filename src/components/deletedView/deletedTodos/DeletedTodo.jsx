@@ -22,6 +22,7 @@ function DeletedTodo({ todo, uid }) {
         status: todo.status,
         subcategoryID: todo.subcategoryID || '',
         timestamp: todo.timestamp,
+        starred: todo.starred || false,
       })
       .then(() => {
         db.collection('users')

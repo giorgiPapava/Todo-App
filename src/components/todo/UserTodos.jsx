@@ -15,6 +15,7 @@ function UserTodos({
   categories,
   currentStatus,
   setCurrentStatus,
+  starred,
 }) {
   const [filteredTodos, setFilteredTodos] = useState(null);
 
@@ -69,6 +70,7 @@ function UserTodos({
       (todo) => todo.subcategoryID === subcategoryID
     );
   }
+
   return (
     <div className="user-todos">
       <TodoHeader
@@ -78,7 +80,7 @@ function UserTodos({
         searchInput={searchInput}
         setSearchInput={setSearchInput}
       />
-      {todos?.length > 0 && (
+      {todos?.length > 0 ? (
         <>
           <CategoryInfo
             currentStatus={currentStatus}
@@ -97,8 +99,20 @@ function UserTodos({
             todos={searchedTodos || filteredTodos || todos}
             uid={uid}
             categories={categories}
+            starred={starred}
           />
         </>
+      ) : (
+        <h2
+          style={{
+            fontSize: '2.3rem',
+            color: 'rgb(72, 57, 70)',
+            textAlign: 'center',
+            marginTop: '50px',
+          }}
+        >
+          Create todos by pressing "Add New Todo" button.
+        </h2>
       )}
     </div>
   );
@@ -109,8 +123,16 @@ export default compose(
     {
       collection: 'users',
       doc: props.uid,
-      subcollections: [{ collection: 'todos' }],
+      subcollections: [
+        props.starred
+          ? {
+              collection: 'todos',
+              where: ['starred', '==', true],
+            }
+          : { collection: 'todos' },
+      ],
       storeAs: `${props.uid}-todos`,
+      queryParams: ['starred=true'],
     },
   ]),
   connect(({ firestore }, props) => {

@@ -6,9 +6,9 @@ import Categories from './categories/Categories';
 import UserTodos from './UserTodos';
 import './Todo.scss';
 
-function Todo({ auth }) {
+function Todo({ auth, starred }) {
   const [currentStatus, setCurrentStatus] = useState("All Todo's");
-  const [showCategories, setShowCategoreis] = useState(true);
+  const [showCategories, setShowCategoreis] = useState(false);
 
   useEffect(() => window.scrollTo(0, 0), []);
 
@@ -24,15 +24,19 @@ function Todo({ auth }) {
 
   return (
     <div className={`todo ${showCategories ? 'hidden' : ''}`}>
-      <div
-        className="burger"
-        onClick={() => setShowCategoreis(!showCategories)}
-      >
-        <div className="line1"></div>
-        <div className="line2"></div>
-        <div className="line3"></div>
-      </div>
-      <Categories uid={auth.uid} showCategories={showCategories} />
+      {!starred && (
+        <>
+          <div
+            className="burger"
+            onClick={() => setShowCategoreis(!showCategories)}
+          >
+            <div className="line1"></div>
+            <div className="line2"></div>
+            <div className="line3"></div>
+          </div>
+          <Categories uid={auth.uid} showCategories={showCategories} />
+        </>
+      )}
 
       <div className={`todo-main ${showCategories ? 'hidden' : ''}`}>
         <Router>
@@ -41,6 +45,7 @@ function Todo({ auth }) {
             uid={auth.uid}
             currentStatus={currentStatus}
             setCurrentStatus={setCurrentStatus}
+            starred={starred}
           />
           <UserTodos
             path="/:categoryID/:subcategoryID"

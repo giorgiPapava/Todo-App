@@ -3,7 +3,6 @@ import React from 'react';
 import HomeIcon from '@material-ui/icons/Home';
 import TodoIcon from '@material-ui/icons/Apps';
 import StarIcon from '@material-ui/icons/Star';
-import CompletedIcon from '@material-ui/icons/AssignmentTurnedIn';
 import DeleteIcon from '@material-ui/icons/Delete';
 import NavLink from 'utils/NavLink';
 import './Navigation.scss';
@@ -41,9 +40,6 @@ function Navigation() {
           </NavLink>
           <NavLink to="starred">
             <StarIcon />
-          </NavLink>
-          <NavLink to="completed">
-            <CompletedIcon />
           </NavLink>
           <NavLink to="deleted">
             <DeleteIcon />

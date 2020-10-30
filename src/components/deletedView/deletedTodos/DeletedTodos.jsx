@@ -11,7 +11,12 @@ function DeletedTodos({ deletedTodos, uid }) {
   if (deletedTodos.length === 0) {
     return (
       <h1
-        style={{ fontSize: '3.2rem', textAlign: 'center', marginTop: '30px' }}
+        style={{
+          fontSize: '3.2rem',
+          textAlign: 'center',
+          paddingTop: '30px',
+          color: '#483946',
+        }}
       >
         No deleted todos!
       </h1>

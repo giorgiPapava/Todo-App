@@ -6,7 +6,6 @@ import Home from 'components/home/Home';
 import Todo from 'components/todo/Todo';
 import SignUp from 'components/auth/SignUp';
 import SignIn from 'components/auth/SignIn';
-import Star from 'components/star/Star';
 import DeletedView from 'components/deletedView/DeletedView';
 
 function App() {
@@ -21,8 +20,7 @@ function App() {
           <SignUp path="/signup" />
           <SignIn path="/signin" />
           <Todo path="/todo/*" />
-          <Star path="/starred" />
-          <Star path="/completed" />
+          <Todo path="/starred/*" starred={true} />
           <DeletedView path="/deleted" />
         </Router>
       </main>
