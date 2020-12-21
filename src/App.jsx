@@ -2,10 +2,10 @@ import React from 'react';
 import 'App.scss';
 import { Router } from '@reach/router';
 import Navigation from 'components/layout/Navigation';
-import Home from 'components/home/Home';
+import Home from 'pages/Home';
 import Todo from 'components/todo/Todo';
-import SignUp from 'components/auth/SignUp';
-import SignIn from 'components/auth/SignIn';
+import SignUp from 'pages/SignUp';
+import SignIn from 'pages/SignIn';
 import DeletedView from 'components/deletedView/DeletedView';
 
 function App() {

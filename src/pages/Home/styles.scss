@@ -1,0 +1,65 @@
+.Home {
+    background: linear-gradient(to right, #6e1fda, #27006a);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+  
+    h2 {
+      font-size: 3.2rem;
+      color: #9d9090;
+      font-weight: 600;
+      text-align: center;
+      margin: 20px 20px;
+    }
+  
+    p {
+      font-size: 1.6rem;
+      margin-top: 15px;
+      color: #ccb1b1bf;
+      font-weight: 300;
+      margin: 20px 0;
+      text-align: center;
+    }
+  
+    .sign-buttons {
+      margin-top: 30px;
+  
+      button:first-child {
+        margin-right: 20px;
+      }
+    }
+  
+    button {
+      margin-top: 10px;
+      padding: 13px 20px;
+      border-radius: 10px;
+      border-style: none;
+      font-weight: 900;
+      font-size: 1.3rem;
+      outline: none;
+      background-color: #2a366a;
+      color: #9b9b9b;
+      cursor: pointer;
+    }
+  
+    .logout-button {
+      position: absolute;
+      right: 0;
+      top: 0;
+      margin: 30px;
+    }
+  
+    .google-button {
+      margin-top: 10px;
+    }
+  }
+  
+  @media screen and (max-width: 600px) {
+    .logout-button {
+      top: 50px !important;
+    }
+  }
+  

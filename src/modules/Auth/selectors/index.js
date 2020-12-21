@@ -1,0 +1,12 @@
+import { createSelector } from 'reselect'
+import { moduleName } from 'modules/Auth'
+
+export const selectAuth = createSelector(
+    (state) => state[moduleName],
+    (state) => state
+)
+
+export const selectUser = createSelector(
+    selectAuth,
+    (state) => state.user
+)
