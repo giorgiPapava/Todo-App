@@ -1,17 +1,22 @@
 import React from 'react';
 import moment from 'moment';
-import { db } from 'config/firebaseConfig';
+import { useSelector } from 'react-redux';
 
 import RestoreIcon from '@material-ui/icons/Restore';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import { selectors as authSelectors } from 'modules/Auth'
+import { useFirestore } from 'react-redux-firebase';
 
-function DeletedTodo({ todo, uid }) {
+function DeletedTodo({ todo }) {
+  const firestore = useFirestore()
+  
   const todoDate = new Date(todo.timestamp?.seconds * 1000);
   const hours = todoDate.getHours();
   const minutes = todoDate.getMinutes();
-
+  
+  const uid = useSelector(authSelectors.selectUid)
   const restoreTodo = () => {
-    db.collection('users')
+    firestore.collection('users')
       .doc(uid)
       .collection('todos')
       .doc(todo.id)
@@ -25,7 +30,7 @@ function DeletedTodo({ todo, uid }) {
         starred: todo.starred || false,
       })
       .then(() => {
-        db.collection('users')
+        firestore.collection('users')
           .doc(uid)
           .collection('deleted-todos')
           .doc(todo.id)
@@ -34,7 +39,7 @@ function DeletedTodo({ todo, uid }) {
   };
 
   const permanentDeleteTodo = () => {
-    db.collection('users')
+    firestore.collection('users')
       .doc(uid)
       .collection('deleted-todos')
       .doc(todo.id)

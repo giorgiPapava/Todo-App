@@ -6,7 +6,7 @@ import Home from 'pages/Home';
 import Todo from 'components/todo/Todo';
 import SignUp from 'pages/SignUp';
 import SignIn from 'pages/SignIn';
-import DeletedView from 'components/deletedView/DeletedView';
+import DeletedView from 'pages/Deleted';
 
 function App() {
   return (
