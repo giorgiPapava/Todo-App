@@ -1,9 +1,9 @@
 import React from 'react';
 import './Loading.scss';
 
-function Loading() {
+function Loading({small}) {
   return (
-    <div className="lds-roller">
+    <div className={`lds-roller ${small && 'small'}`}>
       <div></div>
       <div></div>
       <div></div>

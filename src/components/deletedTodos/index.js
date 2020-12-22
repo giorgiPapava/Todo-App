@@ -6,12 +6,18 @@ import { selectors as firestoreSelectors } from 'modules/Firestore'
 import { selectors as authSelectors } from 'modules/Auth'
 
 import DeletedTodo from 'components/deletedTodos/singleDeletedTodo'
+import Loading from 'layout/Loading'
 
 import './styles.scss'
-import Loading from 'components/layout/Loading'
 
 function DeletedTodos() {
   const { user } = useSelector(authSelectors.selectAuth)
+
+  const deletedTodos = useSelector(firestoreSelectors.selectDeletedTodos)
+  const requesting = useSelector(
+    firestoreSelectors.selectRequestingDeletedTodos
+  )
+
   useFirestoreConnect([
     {
       collection: 'users',
@@ -21,12 +27,8 @@ function DeletedTodos() {
       orderBy: 'timestamp'
     }
   ])
-  const deletedTodos = useSelector(firestoreSelectors.selectDeletedTodos)
-  const requesting = useSelector(
-    firestoreSelectors.selectRequestingDeletedTodos
-  )
 
-  if (deletedTodos && deletedTodos.length === 0) {
+  if (!deletedTodos) {
     return (
       <>
         {requesting && <Loading />}

@@ -3,7 +3,7 @@ import { navigate } from '@reach/router';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { actions as authActions, selectors } from 'modules/Auth';
-import Loading from 'components/layout/Loading';
+import Loading from 'layout/Loading';
 
 import 'pages/Home/styles.scss';
 

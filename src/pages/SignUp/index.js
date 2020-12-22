@@ -4,7 +4,7 @@ import { TextField, makeStyles, Button } from '@material-ui/core'
 import { Link, Redirect } from '@reach/router'
 import { useDispatch, useSelector } from 'react-redux'
 import { actions, selectors } from 'modules/Auth'
-import Loading from 'components/layout/Loading'
+import Loading from 'layout/Loading'
 import './styles.scss'
 import { useEffect } from 'react'
 

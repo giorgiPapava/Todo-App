@@ -3,7 +3,7 @@ import { Redirect } from '@reach/router'
 import { useSelector } from 'react-redux'
 
 import DeletedTodos from 'components/deletedTodos'
-import Loading from 'components/layout/Loading'
+import Loading from 'layout/Loading'
 
 import { selectors } from 'modules/Auth'
 

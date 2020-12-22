@@ -6,6 +6,12 @@
     top: 50%;
     left: 50%;
     transform: translate(-0, -50%);
+
+    &.small {
+        transform: scale(0.5);
+        top: -100%;
+        left: 70%;
+    }
 }
 
 .lds-roller div {

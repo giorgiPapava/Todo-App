@@ -1,5 +1,6 @@
 .todo-categories {
   // scroll functionality without scrollbar
+  position: relative;
   min-height: 100vh;
   overflow: scroll;
   -ms-overflow-style: none;
@@ -51,6 +52,7 @@
     }
 
     .categoryName-wrapper {
+      position: relative;
       display: flex;
       justify-content: space-between;
       width: 80%;

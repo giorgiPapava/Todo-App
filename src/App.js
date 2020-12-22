@@ -1,9 +1,9 @@
 import React from 'react';
 import 'App.scss';
 import { Router } from '@reach/router';
-import Navigation from 'components/layout/Navigation';
+import Navigation from 'layout/Navigation';
 import Home from 'pages/Home';
-import Todo from 'components/todo/Todo';
+import Todo from 'pages/Todo';
 import SignUp from 'pages/SignUp';
 import SignIn from 'pages/SignIn';
 import DeletedView from 'pages/Deleted';
