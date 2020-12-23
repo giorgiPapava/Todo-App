@@ -56,3 +56,31 @@ export const selectRequestingSubCategories = (state, categoryID) => {
     (state) => state.status.requesting[`subcategory-${categoryID}`]
   )(state)
 }
+
+// todos
+export const selectTodos = createSelector(
+  selectFirestoreData,
+  (state) => state.todos && Object.entries(state.todos).map(([key, value]) => ({
+    id: key,
+    ...value
+  }))
+)
+
+export const selectRequestingTodos = createSelector(
+  selectFirestore,
+  (state) => state.status.requesting.todos
+)
+
+// starredtodos
+export const selectStarredTodos = createSelector(
+  selectFirestoreData,
+  (state) => state.starredTodos && Object.entries(state.starredTodos).map(([key, value]) => ({
+    id: key,
+    ...value
+  }))
+)
+
+export const selectRequestingstarredTodos = createSelector(
+  selectFirestore,
+  (state) => state.status.requesting.starredTodos
+)

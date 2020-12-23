@@ -1,5 +1,11 @@
+.wrapper {
+  position: relative;
+  min-height: 100vh
+};
+
 .user-todos {
   margin-bottom: 50px;
+  position: relative;
 
   .category-info {
     margin-top: 20px;

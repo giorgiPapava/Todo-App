@@ -4,14 +4,14 @@ import { useSelector } from 'react-redux';
 
 import Loading from 'layout/Loading';
 import Categories from 'components/todo/categories';
-import UserTodos from 'components/todo/UserTodos';
+import UserTodos from 'components/todo/todos/userTodos';
 
 import { selectors as authSelectors } from 'modules/Auth';
 
 import './styles.scss';
 
 function Todo({ starred }) {
-  const [currentStatus, setCurrentStatus] = useState("All Todo's");
+  const [currentStatus, setCurrentStatus] = useState("Upcoming");
   const [showCategories, setShowCategoreis] = useState(false);
 
   const uid = useSelector(authSelectors.selectUid)
@@ -20,7 +20,7 @@ function Todo({ starred }) {
   useEffect(() => window.scrollTo(0, 0), []);
 
   useEffect(() => {
-    return globalHistory.listen(() => setCurrentStatus("All Todo's"));
+    return globalHistory.listen(() => setCurrentStatus('Upcoming'));
   }, []);
 
   if (!loading && !uid) {
@@ -49,14 +49,12 @@ function Todo({ starred }) {
         <Router>
           <UserTodos
             path="/"
-            uid={uid}
             currentStatus={currentStatus}
             setCurrentStatus={setCurrentStatus}
             starred={starred}
           />
           <UserTodos
             path="/:categoryID/:subcategoryID"
-            uid={uid}
             currentStatus={currentStatus}
             setCurrentStatus={setCurrentStatus}
           />

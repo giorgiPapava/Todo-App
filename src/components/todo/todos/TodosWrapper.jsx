@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import TodoCard from './TodoCard';
 import FlipMove from 'react-flip-move';
+import { useSelector } from 'react-redux';
 
-function Todos({ todos, uid, categories, currentPage, setCurrentPage }) {
+import { selectors as firestoreSelectors } from 'modules/Firestore'
+import { selectors as authSelectors } from 'modules/Auth'
+
+function Todos({ todos, starred, currentPage, setCurrentPage }) {
   const [todosOnPage, setTodosOnPage] = useState([]);
+  const uid = useSelector(authSelectors.selectUid)
+  const categories = useSelector(firestoreSelectors.selectCategories)
 
   useEffect(() => {
     const first = (currentPage - 1) * maxPerPage;

@@ -1,10 +1,21 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+
 import SearchIcon from '@material-ui/icons/Search';
 import { InputBase } from '@material-ui/core';
-import CreateTodo from './createTodo/CreateTodo';
-import './TodoHeader.scss';
 
-function TodoHeader({ uid, categories, todos, searchInput, setSearchInput }) {
+import { selectors as firestoreSelectors } from 'modules/Firestore'
+import { selectors as authSelectors } from 'modules/Auth'
+
+import CreateTodo from '../createTodo/CreateTodo';
+
+import './styles.scss';
+
+function TodoHeader({ searchInput, setSearchInput, starred }) {
+  const uid = useSelector(authSelectors.selectUid)
+  const todos = useSelector(starred ? firestoreSelectors.selectStarredTodos : firestoreSelectors.selectTodos)
+  const categories = useSelector(firestoreSelectors.selectCategories)
+  
   return (
     <div className="todo-header">
       {todos && (
