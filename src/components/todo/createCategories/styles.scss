@@ -1,0 +1,22 @@
+.create-category {
+  h3 {
+      font-size: 2.5rem;
+      color: #141852;
+      margin-bottom: 10px;
+  }
+
+  form {
+      display: flex;
+      flex-direction: column;
+
+      div.MuiFormControl-root {
+          margin: 10px 0;
+      }
+  }
+}
+
+.date-picker {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
