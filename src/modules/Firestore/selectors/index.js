@@ -77,7 +77,7 @@ export const selectStarredTodos = createSelector(
   (state) => state.starredTodos && Object.entries(state.starredTodos).map(([key, value]) => ({
     id: key,
     ...value
-  }))
+  })).filter((todo) => todo.starred)
 )
 
 export const selectRequestingstarredTodos = createSelector(

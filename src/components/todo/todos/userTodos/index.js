@@ -35,17 +35,14 @@ function UserTodos({ currentStatus, setCurrentStatus, starred }) {
       subcollections: [
         {
           collection: 'todos',
-          ...(starred && { where: ['starred', '==', 'true'] })
         }
       ],
       storeAs: starred ? 'starredTodos' : 'todos',
       orderBy: 'timestamp'
     }
   ])
-  // const [filteredTodos, setFilteredTodos] = useState(null);
   const [searchInput, setSearchInput] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
-
   const userTodos = useMemo(() => {
     if (!todos) {
       return
@@ -71,7 +68,6 @@ function UserTodos({ currentStatus, setCurrentStatus, starred }) {
       return todosBySearch.filter((todo) => todo.status === 'todo')
     }
   }, [currentStatus, searchInput, subcategory, todos])
-
   return (
     <div className='wrapper'>
       {requesting && <Loading />}

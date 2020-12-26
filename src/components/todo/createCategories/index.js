@@ -103,7 +103,6 @@ function CreateCategory({ categories, userID }) {
   };
 
   const createSubCategory = (newCategoryID) => {
-    console.log(category);
     const categoryID = newCategoryID || category;
     if (categoryID) {
       firestore.collection('users')

@@ -138,7 +138,7 @@ function CreateTodo({ uid, categories }) {
                     <em>No category</em>
                   </MenuItem>
                   {categories &&
-                    Object.values(categories).map((category) => (
+                    categories.map((category) => (
                       <MenuItem key={category.id} value={category.id}>
                         <em>{category.categoryName}</em>
                       </MenuItem>

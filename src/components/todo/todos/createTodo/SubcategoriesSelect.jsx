@@ -1,9 +1,13 @@
 import React from 'react';
 import { compose } from 'recompose';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux'
 import { TextField, MenuItem } from '@material-ui/core';
+import { selectors as firestoreSelectors } from 'modules/Firestore'
 
-function SubcategoriesSelect({ subID, setSubID, subcategories, variant }) {
+function SubcategoriesSelect({ subID, setSubID, variant, categoryID }) {
+  const subcategories = useSelector((state) =>
+  firestoreSelectors.selectSubCategories(state, categoryID)
+)
   return (
     <TextField
       fullWidth
