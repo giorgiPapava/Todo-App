@@ -2,7 +2,6 @@ import React, { useState, useMemo } from 'react'
 import {} from 'redux'
 import { useSelector } from 'react-redux'
 import { useFirestoreConnect } from 'react-redux-firebase'
-import qs from 'qs'
 
 import TodoHeader from 'components/todo/todos/todoHeader'
 import TodosWrapper from '../TodosWrapper'
