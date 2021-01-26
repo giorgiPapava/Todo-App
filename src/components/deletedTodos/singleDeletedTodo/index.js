@@ -1,19 +1,20 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import moment from 'moment';
 import { useSelector } from 'react-redux';
-
+import { useFirestore } from 'react-redux-firebase';
 import RestoreIcon from '@material-ui/icons/Restore';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+
 import { selectors as authSelectors } from 'modules/Auth'
-import { useFirestore } from 'react-redux-firebase';
+import swalConfirm from 'utils/swalConfirm';
 
 function DeletedTodo({ todo }) {
   const firestore = useFirestore()
-  
+
   const todoDate = new Date(todo.timestamp?.seconds * 1000);
   const hours = todoDate.getHours();
   const minutes = todoDate.getMinutes();
-  
+
   const uid = useSelector(authSelectors.selectUid)
   const restoreTodo = () => {
     firestore.collection('users')
@@ -38,13 +39,18 @@ function DeletedTodo({ todo }) {
       });
   };
 
-  const permanentDeleteTodo = () => {
-    firestore.collection('users')
-      .doc(uid)
-      .collection('deleted-todos')
-      .doc(todo.id)
-      .delete();
-  };
+    const permanentDeleteTodo = useCallback(() => {
+      return firestore.collection('users')
+        .doc(uid)
+        .collection('deleted-todos')
+        .doc(todo.id)
+        .delete();
+    }, [firestore, todo.id, uid])
+
+  const handleDelete = useCallback(() => {
+    swalConfirm('todo', permanentDeleteTodo);
+  }, [permanentDeleteTodo])
+
   return (
     <div className="todo">
       <p>{todo.description}</p>
@@ -52,7 +58,7 @@ function DeletedTodo({ todo }) {
         <button onClick={restoreTodo}>
           Restore <RestoreIcon />
         </button>
-        <button onClick={permanentDeleteTodo}>
+        <button onClick={handleDelete}>
           Delete <DeleteForeverIcon />
         </button>
       </div>
