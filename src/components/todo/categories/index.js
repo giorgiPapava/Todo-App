@@ -11,7 +11,7 @@ import { selectors as firestoreSelectors } from 'modules/Firestore'
 
 import './styles.scss';
 
-function Categories({ showCategories }) {
+function Categories({ showCategories, provided }) {
   const uid = useSelector(authSelectors.selectUid)
   const categories = useSelector(firestoreSelectors.selectCategories)
   const requesting = useSelector(
@@ -32,11 +32,11 @@ function Categories({ showCategories }) {
       {requesting && <Loading />}
       <CreateCategory categories={categories} userID={uid} />
       {categories ? (
-        categories.map((category) => {
+        categories.map((category, index) => {
           return (
             category && (
-              <div key={category.id} className="category-row">
-                <SubCategories categoryID={category.id} />
+              <div key={category.id} className="category-row" style={{ background: 'yellow'}}>
+                <SubCategories parentIndex={index} provided={provided} categoryID={category.id} />
               </div>
             )
           );

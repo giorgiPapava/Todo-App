@@ -45,6 +45,7 @@ export const selectSubCategories = (state, categoryID) => {
     selectFirestoreData,
     (state) => state[`subcategory-${categoryID}`] && Object.entries(state[`subcategory-${categoryID}`]).map(([key, value]) => ( value && {
       id: key,
+      categoryID: categoryID,
       ...value
     }))
   )(state)

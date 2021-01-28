@@ -8,6 +8,7 @@
   display: flex;
   flex-direction: column;
   position: relative;
+  z-index: 10;
 
   &.done-todo {
     border-color: #dcb5b3;
@@ -90,6 +91,9 @@
       color: white;
     }
   }
+}
+.drag {
+  height: 3px !important;
 }
 
 @media screen and (max-width: 1220px) {

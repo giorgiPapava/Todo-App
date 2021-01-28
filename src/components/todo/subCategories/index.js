@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 import { useFirestoreConnect, useFirestore } from 'react-redux-firebase'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever'
 import RemoveCircleIcon from '@material-ui/icons/RemoveCircle'
@@ -11,9 +11,13 @@ import swalConfirm from 'utils/swalConfirm'
 
 import { selectors as authSelectors } from 'modules/Auth'
 import { selectors as firestoreSelectors } from 'modules/Firestore'
-
-function SubCategories({ categoryID }) {
+import { Draggable } from 'react-beautiful-dnd'
+import { actions, selectors } from 'modules/Subcategories'
+function SubCategories({ categoryID, parentIndex }) {
   const firestore = useFirestore()
+  const dispatch = useDispatch()
+
+  const subcategories = useSelector(selectors.selectSubcategories)
 
   const uid = useSelector(authSelectors.selectUid)
   const categories = useSelector(firestoreSelectors.selectCategories)
@@ -90,21 +94,53 @@ function SubCategories({ categoryID }) {
       </div>
 
       {subCategories &&
-        subCategories.map(
-          (subcategory) =>
+        subCategories.map((subcategory, index) => {
+          if (!subcategories.find((sub) => sub.id === subcategory.id)) {
+            dispatch(actions.setSubcategory(subcategory))
+          }
+          return (
             subcategory && (
               <div
-                className='subcategory-wrapper'
-                key={subcategory.id}
-                data-subid={subcategory.id}
+                style={{
+                  padding: '20px',
+                  margin: '20px',
+                  background: 'red'
+                }}
               >
-                <CategoryLink to={categoryID + '/' + subcategory.id}>
-                  {subcategory.subcategoryName}
-                </CategoryLink>
-                <DeleteForeverIcon onClick={handleSubCategoryDelete} />
+                <Draggable
+                  id={subcategory.id}
+                  draggableId={subcategory.id}
+                  index={parentIndex + index}
+                  key={subcategory.id}
+                >
+                  {(provided, snapshot) => (
+                    <>
+                      <div
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                        className='subcategory-wrapper'
+                        key={subcategory.id}
+                        data-subid={subcategory.id}
+                        style={{
+                          transform: 'none !important'
+                        }}
+                      >
+                        <CategoryLink to={categoryID + '/' + subcategory.id}>
+                          {subcategory.subcategoryName}
+                        </CategoryLink>
+                        <DeleteForeverIcon onClick={handleSubCategoryDelete} />
+                      </div>
+                      <div style={{ visibility: 'hidden', height: 0 }}>
+                        {provided.placeholder}
+                      </div>
+                    </>
+                  )}
+                </Draggable>
               </div>
             )
-        )}
+          )
+        })}
     </>
   )
 }

@@ -14,7 +14,7 @@ import { selectors as authSelectors } from 'modules/Auth'
 import './styles.scss'
 import sortTodos from 'utils/sortTodos'
 
-function UserTodos({ currentStatus, setCurrentStatus, starred }) {
+function UserTodos({ currentStatus, setCurrentStatus, starred, provided }) {
   const subcategory = window.location.pathname.split('/')[3]
   const uid = useSelector(authSelectors.selectUid)
   const todos = useSelector(
@@ -88,6 +88,7 @@ function UserTodos({ currentStatus, setCurrentStatus, starred }) {
               setCurrentPage={setCurrentPage}
               todos={todos && userTodos}
               starred={starred}
+              provided={provided}
             />
           </>
         ) : (
