@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import todoLogo from 'images/todo_logo.png'
 import { TextField, makeStyles, Button } from '@material-ui/core'
 import { Link, Redirect } from '@reach/router'
@@ -6,9 +6,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { actions, selectors } from 'modules/Auth'
 import Loading from 'layout/Loading'
 import './styles.scss'
-import { useEffect } from 'react'
 
-function SignUp() {
+function SignUp () {
   const classes = useStyles()
   const dispatch = useDispatch()
 
@@ -52,17 +51,27 @@ function SignUp() {
   }, [dispatch])
 
   if (!loading && user.uid) {
-    return <Redirect noThrow to='/' />
+    return <Redirect
+      noThrow
+      to='/'
+           />
   } else if (loading) {
     return <Loading />
   }
   return (
     <div className='sign'>
       <div className='sign-container'>
-        <img className='todo-logo' src={todoLogo} alt='todo logo' />
+        <img
+          className='todo-logo'
+          src={todoLogo}
+          alt='todo logo'
+        />
         <h3>Sign Up</h3>
         <p>Hello there! Sign Up and start managing your Todo account</p>
-        <form className={classes.root} onSubmit={handleSubmit}>
+        <form
+          className={classes.root}
+          onSubmit={handleSubmit}
+        >
           <div className='sign-fail'>{authError && <p>{authError}</p>}</div>
           <TextField
             required
@@ -93,7 +102,10 @@ function SignUp() {
             onChange={handleChange}
             required
           />
-          <Button type='submit' variant='contained'>
+          <Button
+            type='submit'
+            variant='contained'
+          >
             Sign Up
           </Button>
         </form>

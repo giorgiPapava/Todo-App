@@ -1,53 +1,53 @@
-import React from 'react';
+import React from 'react'
 
-import HomeIcon from '@material-ui/icons/Home';
-import TodoIcon from '@material-ui/icons/Apps';
-import StarIcon from '@material-ui/icons/Star';
-import DeleteIcon from '@material-ui/icons/Delete';
-import NavLink from 'utils/NavLink';
-import './Navigation.scss';
-import todoLogo from 'images/todo.jpg';
-import { motion } from 'framer-motion';
+import HomeIcon from '@material-ui/icons/Home'
+import TodoIcon from '@material-ui/icons/Apps'
+import StarIcon from '@material-ui/icons/Star'
+import DeleteIcon from '@material-ui/icons/Delete'
+import NavLink from 'utils/NavLink'
+import './Navigation.scss'
+import todoLogo from 'images/todo.jpg'
+import { motion } from 'framer-motion'
 
-function Navigation() {
+function Navigation () {
   return (
-    <div className="navigation">
-      <div className="nav-wrapper">
+    <div className='navigation'>
+      <div className='nav-wrapper'>
         <nav>
           <motion.div
             whileHover={{
               scale: [1, 1.2, 1.2, 1, 1],
-              rotate: [0, 0, 360, 360, 0],
+              rotate: [0, 0, 360, 360, 0]
             }}
             transition={{ duration: 1 }}
             whileTap={{ scale: 0.9 }}
           >
             <img
+              // eslint-disable-next-line react/jsx-no-bind
               onDragStart={(e) => {
-                e.preventDefault();
+                e.preventDefault()
               }}
-              alt="avatar"
+              alt='avatar'
               src={todoLogo}
-              className="avatar"
+              className='avatar'
             />
           </motion.div>
-          <NavLink to="/">
+          <NavLink to='/'>
             <HomeIcon />
           </NavLink>
-          <NavLink to="todo">
-            {/* for now it redirects to todo but I want it to redirect to first category*/}
+          <NavLink to='todo'>
             <TodoIcon />
           </NavLink>
-          <NavLink to="starred">
+          <NavLink to='starred'>
             <StarIcon />
           </NavLink>
-          <NavLink to="deleted">
+          <NavLink to='deleted'>
             <DeleteIcon />
           </NavLink>
         </nav>
       </div>
     </div>
-  );
+  )
 }
 
-export default Navigation;
+export default Navigation

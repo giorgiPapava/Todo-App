@@ -1,18 +1,18 @@
-import React, { useState, forwardRef } from 'react';
-import moment from 'moment';
+/* eslint-disable react/jsx-no-bind */
+import React, { useState, forwardRef } from 'react'
+import moment from 'moment'
 
-import { firestore } from 'firebase';
-import { db } from 'config/firebaseConfig';
-import swalConfirm from 'utils/swalConfirm';
+import { firestore } from 'firebase'
+import { db } from 'config/firebaseConfig'
+import swalConfirm from 'utils/swalConfirm'
 
-import EditTodo from './EditTodo';
+import StarBorderIcon from '@material-ui/icons/StarBorder'
+import StarIcon from '@material-ui/icons/Star'
+import EditIcon from '@material-ui/icons/Edit'
+import ClearIcon from '@material-ui/icons/Clear'
+import EditTodo from './EditTodo'
 
-import StarBorderIcon from '@material-ui/icons/StarBorder';
-import StarIcon from '@material-ui/icons/Star';
-import EditIcon from '@material-ui/icons/Edit';
-import ClearIcon from '@material-ui/icons/Clear';
-
-import './TodoCard.scss';
+import './TodoCard.scss'
 
 const TodoCard = forwardRef(
   (
@@ -26,22 +26,22 @@ const TodoCard = forwardRef(
       subcategoryID,
       categories,
       timestamp,
-      starred,
+      starred
     },
     ref
   ) => {
-    const [openEdit, setOpenEdit] = useState(false);
+    const [openEdit, setOpenEdit] = useState(false)
     const changeStatus = () => {
       db.collection('users')
         .doc(uid)
         .collection('todos')
         .doc(todoID)
-        .update({ status: status === 'todo' ? 'done' : 'todo' });
-    };
+        .update({ status: status === 'todo' ? 'done' : 'todo' })
+    }
 
-    const todoDate = new Date(date?.seconds * 1000);
-    const hours = todoDate.getHours();
-    const minutes = todoDate.getMinutes();
+    const todoDate = new Date(date?.seconds * 1000)
+    const hours = todoDate.getHours()
+    const minutes = todoDate.getMinutes()
 
     const moveToDeleted = () => {
       return db
@@ -56,23 +56,23 @@ const TodoCard = forwardRef(
           status,
           timestamp: firestore.FieldValue.serverTimestamp(),
           subcategoryID: subcategoryID || '',
-          starred: starred || false,
-        });
-    };
+          starred: starred || false
+        })
+    }
 
     const deleteFunction = () => {
-      moveToDeleted();
+      moveToDeleted()
       return db
         .collection('users')
         .doc(uid)
         .collection('todos')
         .doc(todoID)
-        .delete();
-    };
+        .delete()
+    }
 
     const handleDelete = () => {
-      swalConfirm('todo', deleteFunction, moveToDeleted);
-    };
+      swalConfirm('todo', deleteFunction, moveToDeleted)
+    }
 
     const handleToggleStar = () => {
       db.collection('users')
@@ -80,29 +80,35 @@ const TodoCard = forwardRef(
         .collection('todos')
         .doc(todoID)
         .update({
-          starred: starred ? false : true,
-        });
-    };
+          starred: !starred
+        })
+    }
 
     return (
       <div
         ref={ref}
         className={`todo-card ${status === 'done' && 'done-todo'}`}
       >
-        <div className="actions">
+        <div className='actions'>
           <EditIcon onClick={() => setOpenEdit(true)} />
           {starred ? (
-            <StarIcon style={{ color: '#d9d909' }} onClick={handleToggleStar} />
+            <StarIcon
+              style={{ color: '#d9d909' }}
+              onClick={handleToggleStar}
+            />
           ) : (
             <StarBorderIcon onClick={handleToggleStar} />
           )}
-          <ClearIcon onClick={handleDelete} className="remove" />
+          <ClearIcon
+            onClick={handleDelete}
+            className='remove'
+          />
         </div>
         <p className={`todo-status ${status === 'done' && 'done-todo'}`}>
           {status}
         </p>
 
-        <h4 className="todo-desc">{description}</h4>
+        <h4 className='todo-desc'>{description}</h4>
         {openEdit && (
           <EditTodo
             open={openEdit}
@@ -131,8 +137,8 @@ const TodoCard = forwardRef(
           Mark as done
         </button>
       </div>
-    );
+    )
   }
-);
+)
 
-export default TodoCard;
+export default TodoCard

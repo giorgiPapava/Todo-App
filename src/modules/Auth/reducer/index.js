@@ -3,51 +3,51 @@ import { persistReducer } from 'redux-persist'
 
 import { constants } from 'modules/Auth'
 
-import swallSuccess from 'utils/swalSuccess';
-import swallFailure from 'utils/swalFailure';
+import swallSuccess from 'utils/swalSuccess'
+import swallFailure from 'utils/swalFailure'
 
 const initialState = {
   authError: null,
   user: {},
   loading: false
-};
+}
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case constants.LOGIN_ERROR:
-      swallFailure(action.error.message);
+      swallFailure(action.error.message)
       return {
         ...state,
         loading: false,
-        authError: action.error.message,
-      };
+        authError: action.error.message
+      }
     case constants.LOGIN_SUCCESS:
-      swallSuccess('Welcome Back!');
+      swallSuccess('Welcome Back!')
 
       return {
         ...state,
         authError: null,
         loading: false,
         user: action.user
-      };
+      }
     case constants.SIGN_OUT_SUCCESS:
-      swallSuccess('Bye bye :)');
-      return initialState;
+      swallSuccess('Bye bye :)')
+      return initialState
     case constants.SIGNUP_SUCCESS:
-      swallSuccess('Welcome!');
+      swallSuccess('Welcome!')
 
       return {
         ...state,
         loading: false,
-        authError: null,
-      };
+        authError: null
+      }
     case constants.SIGNUP_ERROR:
-      swallFailure(action.error.message);
+      swallFailure(action.error.message)
       return {
         ...state,
         loading: false,
-        authError: action.error.message,
-      };
+        authError: action.error.message
+      }
     case constants.AUTH_LOADING:
       return {
         ...state,
@@ -59,13 +59,13 @@ const authReducer = (state = initialState, action) => {
         authError: null
       }
     default:
-      return state;
+      return state
   }
-};
+}
 
 const authPersistConfig = {
   key: 'auth',
   storage
 }
 
-export default persistReducer(authPersistConfig, authReducer);
+export default persistReducer(authPersistConfig, authReducer)

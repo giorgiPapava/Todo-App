@@ -2,8 +2,8 @@ import { createSelector } from 'reselect'
 import { moduleName } from 'modules/Firestore'
 
 export const selectFirestore = createSelector(
-    (state) => state[moduleName],
-    (state) => state
+  (state) => state[moduleName],
+  (state) => state
 )
 
 export const selectFirestoreData = createSelector(
@@ -43,7 +43,7 @@ export const selectRequestingCategories = createSelector(
 export const selectSubCategories = (state, categoryID) => {
   return createSelector(
     selectFirestoreData,
-    (state) => state[`subcategory-${categoryID}`] && Object.entries(state[`subcategory-${categoryID}`]).map(([key, value]) => ( value && {
+    (state) => state[`subcategory-${categoryID}`] && Object.entries(state[`subcategory-${categoryID}`]).map(([key, value]) => (value && {
       id: key,
       ...value
     }))

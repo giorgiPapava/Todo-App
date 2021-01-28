@@ -1,22 +1,23 @@
-import React from 'react';
-import { compose } from 'recompose';
+/* eslint-disable react/jsx-no-bind */
+import React from 'react'
+import { compose } from 'recompose'
 import { connect, useSelector } from 'react-redux'
-import { TextField, MenuItem } from '@material-ui/core';
+import { TextField, MenuItem } from '@material-ui/core'
 import { selectors as firestoreSelectors } from 'modules/Firestore'
 
-function SubcategoriesSelect({ subID, setSubID, variant, categoryID }) {
+function SubcategoriesSelect ({ subID, setSubID, variant, categoryID }) {
   const subcategories = useSelector((state) =>
-  firestoreSelectors.selectSubCategories(state, categoryID)
-)
+    firestoreSelectors.selectSubCategories(state, categoryID)
+  )
   return (
     <TextField
       fullWidth
       select
       required
-      variant={variant ? variant : 'filled'}
-      labelid="subcategory-name-label"
-      id="subcategory-name"
-      label="Subcategory"
+      variant={variant || 'filled'}
+      labelid='subcategory-name-label'
+      id='subcategory-name'
+      label='Subcategory'
       value={subID}
       onChange={(event) => setSubID(event.target.value)}
     >
@@ -31,14 +32,14 @@ function SubcategoriesSelect({ subID, setSubID, variant, categoryID }) {
           </MenuItem>
         ))}
     </TextField>
-  );
+  )
 }
 
 export default compose(
   connect(({ firestore }, props) => {
     return {
       subcategories:
-        firestore.ordered[`${props.categoryID}-subcategories`] || [],
-    };
+        firestore.ordered[`${props.categoryID}-subcategories`] || []
+    }
   })
-)(SubcategoriesSelect);
+)(SubcategoriesSelect)

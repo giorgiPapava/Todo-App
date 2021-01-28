@@ -10,7 +10,7 @@ import Loading from 'layout/Loading'
 
 import './styles.scss'
 
-function DeletedTodos() {
+function DeletedTodos () {
   const { user } = useSelector(authSelectors.selectAuth)
 
   const deletedTodos = useSelector(firestoreSelectors.selectDeletedTodos)
@@ -51,7 +51,10 @@ function DeletedTodos() {
       <div className='deleted-todos'>
         {deletedTodos &&
           deletedTodos.map((todo) => (
-            <DeletedTodo todo={todo} key={todo.id} />
+            <DeletedTodo
+              todo={todo}
+              key={todo.id}
+            />
           ))}
       </div>
     </>

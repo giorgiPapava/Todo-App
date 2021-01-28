@@ -1,32 +1,38 @@
-import React, { useState, useEffect } from 'react';
-import { Redirect, Router, globalHistory } from '@reach/router';
-import { useSelector } from 'react-redux';
+/* eslint-disable react/jsx-no-bind */
+import React, { useState, useEffect } from 'react'
+import { Redirect, Router, globalHistory } from '@reach/router'
+import { useSelector } from 'react-redux'
 
-import Loading from 'layout/Loading';
-import Categories from 'components/todo/categories';
-import UserTodos from 'components/todo/todos/userTodos';
+import Loading from 'layout/Loading'
+import Categories from 'components/todo/categories'
+import UserTodos from 'components/todo/todos/userTodos'
 
-import { selectors as authSelectors } from 'modules/Auth';
+import { selectors as authSelectors } from 'modules/Auth'
 
-import './styles.scss';
+import './styles.scss'
 
-function Todo({ starred }) {
-  const [currentStatus, setCurrentStatus] = useState("Upcoming");
-  const [showCategories, setShowCategoreis] = useState(false);
+function Todo ({ starred }) {
+  const [currentStatus, setCurrentStatus] = useState('Upcoming')
+  const [showCategories, setShowCategoreis] = useState(false)
 
   const uid = useSelector(authSelectors.selectUid)
   const loading = useSelector(authSelectors.selectAuthLoading)
 
-  useEffect(() => window.scrollTo(0, 0), []);
+  useEffect(() => window.scrollTo(0, 0), [])
 
   useEffect(() => {
-    return globalHistory.listen(() => setCurrentStatus('Upcoming'));
-  }, []);
+    return globalHistory.listen(() => setCurrentStatus('Upcoming'))
+  }, [])
 
   if (!loading && !uid) {
-    return <Redirect noThrow to="/" />;
+    return (
+      <Redirect
+        noThrow
+        to='/'
+      />
+    )
   } else if (loading) {
-    return <Loading />;
+    return <Loading />
   }
 
   return (
@@ -34,12 +40,12 @@ function Todo({ starred }) {
       {!starred && (
         <>
           <div
-            className="burger"
+            className='burger'
             onClick={() => setShowCategoreis(!showCategories)}
           >
-            <div className="line1"></div>
-            <div className="line2"></div>
-            <div className="line3"></div>
+            <div className='line1' />
+            <div className='line2' />
+            <div className='line3' />
           </div>
           <Categories showCategories={showCategories} />
         </>
@@ -48,20 +54,20 @@ function Todo({ starred }) {
       <div className={`todo-main ${showCategories ? 'hidden' : ''}`}>
         <Router>
           <UserTodos
-            path="/"
+            path='/'
             currentStatus={currentStatus}
             setCurrentStatus={setCurrentStatus}
             starred={starred}
           />
           <UserTodos
-            path="/:categoryID/:subcategoryID"
+            path='/:categoryID/:subcategoryID'
             currentStatus={currentStatus}
             setCurrentStatus={setCurrentStatus}
           />
         </Router>
       </div>
     </div>
-  );
+  )
 }
 
 export default Todo

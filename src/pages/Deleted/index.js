@@ -7,26 +7,30 @@ import Loading from 'layout/Loading'
 
 import { selectors } from 'modules/Auth'
 
-function DeletedView() {
-  
+function DeletedView () {
   const { user, loading } = useSelector(selectors.selectAuth)
 
   useEffect(() => window.scrollTo(0, 0), [])
 
   if (!loading && !user.uid) {
-    return <Redirect noThrow to='/' />
+    return <Redirect
+      noThrow
+      to='/'
+           />
   } else if (loading) {
     return <Loading />
   }
   return (
     <div
       className='deleted'
-      style={{ position: 'relative', minHeight: '100vh' }}
+      style={{
+        position: 'relative',
+        minHeight: '100vh'
+      }}
     >
       <DeletedTodos />
     </div>
   )
 }
-
 
 export default DeletedView

@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useCallback } from 'react'
 import { useFirestoreConnect, useFirestore } from 'react-redux-firebase'
 import { useSelector } from 'react-redux'
 
@@ -12,7 +12,7 @@ import swalConfirm from 'utils/swalConfirm'
 import { selectors as authSelectors } from 'modules/Auth'
 import { selectors as firestoreSelectors } from 'modules/Firestore'
 
-function SubCategories({ categoryID }) {
+function SubCategories ({ categoryID }) {
   const firestore = useFirestore()
 
   const uid = useSelector(authSelectors.selectUid)
@@ -35,7 +35,10 @@ function SubCategories({ categoryID }) {
       collection: 'users',
       doc: uid,
       subcollections: [
-        { collection: 'categories', doc: categoryID },
+        {
+          collection: 'categories',
+          doc: categoryID
+        },
         { collection: 'subcategories' }
       ],
       storeAs: `subcategory-${categoryID}`,
@@ -43,7 +46,7 @@ function SubCategories({ categoryID }) {
     }
   ])
 
-  const subcategoryDeleteFunction = (subCategoryID) => {
+  const subcategoryDeleteFunction = useCallback((subCategoryID) => {
     return firestore
       .collection('users')
       .doc(uid)
@@ -52,36 +55,40 @@ function SubCategories({ categoryID }) {
       .collection('subcategories')
       .doc(subCategoryID)
       .delete()
-  }
+  }, [categoryID, firestore, uid])
 
-  const categoryDeleteFunction = (categoryID) => {
+  const categoryDeleteFunction = useCallback((categoryID) => {
     return firestore
       .collection('users')
       .doc(uid)
       .collection('categories')
       .doc(categoryID)
       .delete()
-  }
+  }, [firestore, uid])
 
-  const handleSubCategoryDelete = (e) => {
+  const handleSubCategoryDelete = useCallback((e) => {
     const subCategoryID =
       e.target.parentNode.dataset.subid ||
       e.target.parentNode.parentNode.dataset.subid
 
     subCategoryID &&
       swalConfirm('subcategory', subcategoryDeleteFunction, subCategoryID)
-  }
+  }, [subcategoryDeleteFunction])
 
-  const handleCategoryDelete = (e) => {
+  const handleCategoryDelete = useCallback((e) => {
     const categoryID =
       e.target.parentNode.dataset.subid ||
       e.target.parentNode.parentNode.dataset.categoryid
 
     categoryID && swalConfirm('category', categoryDeleteFunction, categoryID)
-  }
+  }, [categoryDeleteFunction])
+
   return (
     <>
-      <div className='categoryName-wrapper' data-categoryid={categoryID}>
+      <div
+        className='categoryName-wrapper'
+        data-categoryid={categoryID}
+      >
         {requesting && <Loading small />}
         <h3>{category.categoryName}</h3>
         {!requesting && !subCategories && (

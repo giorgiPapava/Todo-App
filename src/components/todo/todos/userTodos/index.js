@@ -4,8 +4,6 @@ import { useSelector } from 'react-redux'
 import { useFirestoreConnect } from 'react-redux-firebase'
 
 import TodoHeader from 'components/todo/todos/todoHeader'
-import TodosWrapper from '../TodosWrapper'
-import CategoryInfo from '../CategoryInfo'
 import Loading from 'layout/Loading'
 
 import { selectors as firestoreSelectors } from 'modules/Firestore'
@@ -13,8 +11,10 @@ import { selectors as authSelectors } from 'modules/Auth'
 
 import './styles.scss'
 import sortTodos from 'utils/sortTodos'
+import CategoryInfo from '../CategoryInfo'
+import TodosWrapper from '../TodosWrapper'
 
-function UserTodos({ currentStatus, setCurrentStatus, starred }) {
+function UserTodos ({ currentStatus, setCurrentStatus, starred }) {
   const subcategory = window.location.pathname.split('/')[3]
   const uid = useSelector(authSelectors.selectUid)
   const todos = useSelector(
@@ -33,7 +33,7 @@ function UserTodos({ currentStatus, setCurrentStatus, starred }) {
       doc: uid,
       subcollections: [
         {
-          collection: 'todos',
+          collection: 'todos'
         }
       ],
       storeAs: starred ? 'starredTodos' : 'todos',
@@ -53,10 +53,10 @@ function UserTodos({ currentStatus, setCurrentStatus, starred }) {
 
     const todosBySearch = searchInput
       ? todosBySubcategory.filter(
-          (todo) =>
-            todo.description &&
+        (todo) =>
+          todo.description &&
             todo.description.toLowerCase().includes(searchInput.toLowerCase())
-        )
+      )
       : todosBySubcategory
 
     if (currentStatus === "All Todo's") {

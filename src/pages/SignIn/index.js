@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Loading from 'layout/Loading'
 import './styles.scss'
 
-function SignIn() {
+function SignIn () {
   const classes = useStyles()
   const dispatch = useDispatch()
 
@@ -27,7 +27,10 @@ function SignIn() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    dispatch(actions.signIn({ email, password }))
+    dispatch(actions.signIn({
+      email,
+      password
+    }))
   }
 
   // cleanup
@@ -38,7 +41,10 @@ function SignIn() {
   }, [dispatch])
 
   if (!loading && user.uid) {
-    return <Redirect noThrow to='/' />
+    return <Redirect
+      noThrow
+      to='/'
+           />
   } else if (loading) {
     return <Loading />
   }
@@ -46,10 +52,17 @@ function SignIn() {
   return (
     <div className='sign'>
       <div className='sign-container'>
-        <img className='todo-logo' src={todoLogo} alt='todo logo' />
+        <img
+          className='todo-logo'
+          src={todoLogo}
+          alt='todo logo'
+        />
         <h3>Sign In</h3>
         <p>Hello there! Sign In and start managing your Todo account</p>
-        <form className={classes.root} onSubmit={handleSubmit}>
+        <form
+          className={classes.root}
+          onSubmit={handleSubmit}
+        >
           <div className='sign-fail'>{authError && <p>{authError}</p>}</div>
           <TextField
             required
@@ -66,7 +79,10 @@ function SignIn() {
             onChange={handleChange}
             required
           />
-          <Button type='submit' variant='contained'>
+          <Button
+            type='submit'
+            variant='contained'
+          >
             Sign In
           </Button>
         </form>

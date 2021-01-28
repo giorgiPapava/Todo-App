@@ -1,6 +1,6 @@
-const { default: Swal } = require('sweetalert2');
+const { default: Swal } = require('sweetalert2')
 
-export default function swalConfirm(type, successFunction, ...successParams) {
+export default function swalConfirm (type, successFunction, ...successParams) {
   Swal.fire({
     title: 'Are you sure?',
     text: "You won't be able to revert this!",
@@ -9,7 +9,7 @@ export default function swalConfirm(type, successFunction, ...successParams) {
     showCancelButton: true,
     confirmButtonText: 'Yes, delete it!',
     cancelButtonText: 'No, cancel!',
-    reverseButtons: true,
+    reverseButtons: true
   }).then((result) => {
     if (result.value) {
       successFunction(...successParams)
@@ -21,15 +21,15 @@ export default function swalConfirm(type, successFunction, ...successParams) {
             icon: 'error',
             title: 'Oops...',
             text: 'Something went wrong!',
-            footer: error,
+            footer: error
           })
-        );
+        )
       // yes function
     } else if (
       /* Read more about handling dismissals below */
       result.dismiss === Swal.DismissReason.cancel
     ) {
-      Swal.fire('Cancelled', `Your ${type} is safe :)`, 'error');
+      Swal.fire('Cancelled', `Your ${type} is safe :)`, 'error')
     }
-  });
+  })
 }
